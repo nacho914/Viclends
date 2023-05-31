@@ -2,6 +2,7 @@ package victor.paez.dashboard
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -13,9 +14,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun Dashboard() {
+fun Dashboard(innerPadding: PaddingValues) {
     Column(
-        modifier = Modifier.padding(16.dp).fillMaxSize(),
+        modifier = Modifier.padding(innerPadding).fillMaxSize(),
         verticalArrangement = Arrangement.SpaceAround,
     ) {
         Row(
@@ -23,7 +24,7 @@ fun Dashboard() {
             horizontalArrangement = Arrangement.Center,
         ) {
             Text(
-                text = "Total Prestamos",
+                text = "Total Prestamos nacho",
             )
         }
 
@@ -64,6 +65,24 @@ fun Dashboard() {
         }
 
         Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.Center,
+        ) {
+            Text(
+                text = "0",
+            )
+        }
+
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.Center,
+        ) {
+            Text(
+                text = "Interes obtenido",
+            )
+        }
+
+        Row(
             modifier = Modifier.fillMaxWidth().padding(bottom = 16.dp),
             horizontalArrangement = Arrangement.Center,
         ) {
@@ -77,5 +96,5 @@ fun Dashboard() {
 @Preview
 @Composable
 fun DashboardPreview() {
-    Dashboard()
+    Dashboard(PaddingValues(16.dp))
 }

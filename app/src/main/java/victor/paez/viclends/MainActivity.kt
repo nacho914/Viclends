@@ -1,9 +1,9 @@
 package victor.paez.viclends
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -13,12 +13,11 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import victor.paez.dashboard.Dashboard
 import victor.paez.viclends.ui.theme.ViclendsTheme
 
 class MainActivity : ComponentActivity() {
-
-    @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
     @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +38,7 @@ class MainActivity : ComponentActivity() {
                             ),
                         )
                     },
-                    content = { Dashboard() },
+                    content = { innerPadding -> Dashboard(innerPadding) },
                     // color = MaterialTheme.colorScheme.background,
                 )
             }
@@ -51,6 +50,6 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun GreetingPreview() {
     ViclendsTheme {
-        Dashboard()
+        Dashboard(PaddingValues(16.dp))
     }
 }
