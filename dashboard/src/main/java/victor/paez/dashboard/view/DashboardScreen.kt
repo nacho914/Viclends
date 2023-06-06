@@ -1,4 +1,4 @@
-package victor.paez.dashboard
+package victor.paez.dashboard.view
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -12,9 +12,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import victor.paez.dashboard.viewmodel.DashboardViewModel
 
 @Composable
-fun Dashboard(innerPadding: PaddingValues) {
+fun Dashboard(
+    innerPadding: PaddingValues,
+    dashboardViewModel: DashboardViewModel = hiltViewModel(),
+) {
+    val totalLend = dashboardViewModel.dashboardData.value.totalLends
+    val people = dashboardViewModel.dashboardData.value.people
+    val totalEveryWeek = dashboardViewModel.dashboardData.value.totalEveryWeek
+    val revenue = dashboardViewModel.dashboardData.value.revenue
+
     Column(
         modifier = Modifier.padding(innerPadding).fillMaxSize(),
         verticalArrangement = Arrangement.SpaceAround,
@@ -33,7 +43,7 @@ fun Dashboard(innerPadding: PaddingValues) {
             horizontalArrangement = Arrangement.Center,
         ) {
             Text(
-                text = "0",
+                text = totalLend.toString(),
             )
         }
 
@@ -51,7 +61,7 @@ fun Dashboard(innerPadding: PaddingValues) {
             horizontalArrangement = Arrangement.Center,
         ) {
             Text(
-                text = "0",
+                text = people.toString(),
             )
         }
 
@@ -69,7 +79,7 @@ fun Dashboard(innerPadding: PaddingValues) {
             horizontalArrangement = Arrangement.Center,
         ) {
             Text(
-                text = "0",
+                text = totalEveryWeek.toString(),
             )
         }
 
@@ -87,7 +97,7 @@ fun Dashboard(innerPadding: PaddingValues) {
             horizontalArrangement = Arrangement.Center,
         ) {
             Text(
-                text = "0",
+                text = revenue.toString(),
             )
         }
     }

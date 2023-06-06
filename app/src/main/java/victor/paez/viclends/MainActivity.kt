@@ -14,9 +14,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import victor.paez.dashboard.Dashboard
+import dagger.hilt.android.AndroidEntryPoint
+import victor.paez.dashboard.view.Dashboard
 import victor.paez.viclends.ui.theme.ViclendsTheme
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {

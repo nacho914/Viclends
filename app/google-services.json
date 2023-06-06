@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "97053957237",
+    "project_id": "viclends-a84ca",
+    "storage_bucket": "viclends-a84ca.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:97053957237:android:f2a45fa81fd1b63f65ec3c",
+        "android_client_info": {
+          "package_name": "com.example.viclends"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "97053957237-jc0loc1b26d4kg31q43rdn4q5d1tg2nv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBhpMuFwnkbR4j9XAFsuoz7VVJDUzB5ooE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "97053957237-jc0loc1b26d4kg31q43rdn4q5d1tg2nv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:97053957237:android:58acc0febd6adfa165ec3c",
+        "android_client_info": {
+          "package_name": "victor.paez.viclends"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "97053957237-jc0loc1b26d4kg31q43rdn4q5d1tg2nv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBhpMuFwnkbR4j9XAFsuoz7VVJDUzB5ooE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "97053957237-jc0loc1b26d4kg31q43rdn4q5d1tg2nv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
