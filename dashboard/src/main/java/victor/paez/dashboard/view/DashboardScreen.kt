@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -14,6 +15,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import victor.paez.dashboard.viewmodel.DashboardViewModel
+import victor.paez.ui.LoadingWheel
 
 @Composable
 fun Dashboard(
@@ -24,6 +26,11 @@ fun Dashboard(
     val people = dashboardViewModel.dashboardData.value.people
     val totalEveryWeek = dashboardViewModel.dashboardData.value.totalEveryWeek
     val revenue = dashboardViewModel.dashboardData.value.revenue
+    val isLoading = dashboardViewModel.isLoading
+
+    if (isLoading.value) {
+        LoadingWheel()
+    }
 
     Column(
         modifier = Modifier.padding(innerPadding).fillMaxSize(),
@@ -93,12 +100,20 @@ fun Dashboard(
         }
 
         Row(
-            modifier = Modifier.fillMaxWidth().padding(bottom = 16.dp),
+            modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.Center,
         ) {
             Text(
                 text = revenue.toString(),
             )
+        }
+        Row(
+            modifier = Modifier.fillMaxWidth().padding(bottom = 16.dp),
+            horizontalArrangement = Arrangement.Center,
+        ) {
+            Button(onClick = { dashboardViewModel.getDashboardData() }) {
+                Text(text = "Listado de clientes")
+            }
         }
     }
 }
