@@ -22,7 +22,7 @@ class DashboardViewModel@Inject constructor(
     init {
         getDashboardData()
     }
-    fun getDashboardData() {
+    private fun getDashboardData() {
         isLoading.value = true
         viewModelScope.launch {
             getResumeDataUseCase.invoke().collect {

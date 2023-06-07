@@ -11,11 +11,12 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/dashboard" />
             <option value="$PROJECT_DIR$/data" />
             <option value="$PROJECT_DIR$/data/resumeInformation" />
             <option value="$PROJECT_DIR$/data/useCases" />
             <option value="$PROJECT_DIR$/view" />
+            <option value="$PROJECT_DIR$/view/clientsList" />
+            <option value="$PROJECT_DIR$/view/dashboard" />
             <option value="$PROJECT_DIR$/view/ui" />
           </set>
         </option>

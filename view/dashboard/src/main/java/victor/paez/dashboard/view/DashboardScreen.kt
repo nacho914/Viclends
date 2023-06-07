@@ -111,7 +111,7 @@ fun Dashboard(
             modifier = Modifier.fillMaxWidth().padding(bottom = 16.dp),
             horizontalArrangement = Arrangement.Center,
         ) {
-            Button(onClick = { dashboardViewModel.getDashboardData() }) {
+            Button(onClick = { }) {
                 Text(text = "Listado de clientes")
             }
         }
