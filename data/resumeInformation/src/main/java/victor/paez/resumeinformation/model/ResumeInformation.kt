@@ -1,10 +1,10 @@
 package victor.paez.resumeinformation.model
 
 import com.google.firebase.firestore.DocumentSnapshot
-import victor.paez.resumeinformation.datasource.PEOPLE
-import victor.paez.resumeinformation.datasource.REVENUE
-import victor.paez.resumeinformation.datasource.TOTAL_EVERY_WEEK
-import victor.paez.resumeinformation.datasource.TOTAL_LENDS
+import victor.paez.resumeinformation.PEOPLE
+import victor.paez.resumeinformation.REVENUE
+import victor.paez.resumeinformation.TOTAL_EVERY_WEEK
+import victor.paez.resumeinformation.TOTAL_LENDS
 
 data class ResumeInformation(
     var totalLends: Int = 1,
@@ -23,6 +23,5 @@ data class ResumeInformation(
                 people = document.getLong(PEOPLE)?.toInt() ?: 0,
                 revenue = document.getLong(REVENUE)?.toInt() ?: 0,
             )
-        var resumeInformation = ResumeInformation()
     }
 }

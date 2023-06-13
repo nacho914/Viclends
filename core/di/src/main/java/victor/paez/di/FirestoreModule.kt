@@ -1,4 +1,4 @@
-package victor.paez.resumeinformation.di
+package victor.paez.di
 
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore

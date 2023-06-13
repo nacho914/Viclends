@@ -1,4 +1,4 @@
-package victor.paez.resumeinformation.datasource
+package victor.paez.resumeinformation
 
 const val MAIN_PATH = "Masters"
 const val RESUME_INFORMATION_PATH = "vipp.914@gmail.com"

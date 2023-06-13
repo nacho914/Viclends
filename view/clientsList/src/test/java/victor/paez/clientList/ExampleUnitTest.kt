@@ -1,4 +1,4 @@
-package victor.paez.clientslist
+package victor.paez.clientList
 
 import org.junit.Test
 

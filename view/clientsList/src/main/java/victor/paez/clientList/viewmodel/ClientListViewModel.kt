@@ -1,33 +1,34 @@
-package victor.paez.dashboard.viewmodel
+package victor.paez.clientList.viewmodel
 
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import victor.paez.usecases.dashboard.GetResumeDataUseCase
-import victor.paez.usecases.dashboard.model.DashboardData
+import victor.paez.usecases.dashboard.GetClientListUseCase
+import victor.paez.usecases.dashboard.model.ClientListUI
 import javax.inject.Inject
 
 @HiltViewModel
-class DashboardViewModel @Inject constructor(
-    private val getResumeDataUseCase: GetResumeDataUseCase,
+class ClientListViewModel @Inject constructor(
+    private val getClientListUseCase: GetClientListUseCase,
 ) : ViewModel() {
-    var dashboardData = mutableStateOf(DashboardData())
+
+    var clientList = mutableStateOf(listOf<ClientListUI>())
         private set
 
     var isLoading = mutableStateOf(true)
         private set
 
     init {
-        getDashboardData()
+        getClientList()
     }
-    private fun getDashboardData() {
+    private fun getClientList() {
         isLoading.value = true
         viewModelScope.launch {
-            getResumeDataUseCase.invoke().collect {
+            getClientListUseCase.invoke().collect {
                 isLoading.value = false
-                dashboardData.value = it
+                clientList.value = it
             }
         }
     }
