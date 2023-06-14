@@ -24,6 +24,7 @@ import victor.paez.ui.LoadingWheel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ClientListScreen(
+    navClientDetail: (clientId: String) -> Unit,
     dashboardViewModel: ClientListViewModel = hiltViewModel(),
 ) {
     val clientList = dashboardViewModel.clientList.value
@@ -35,7 +36,7 @@ fun ClientListScreen(
     LazyColumn(modifier = Modifier.fillMaxSize()) {
         items(clientList) { client ->
             Surface(
-                onClick = { },
+                onClick = { navClientDetail(client.name) },
                 modifier = Modifier
                     .padding(8.dp),
                 shape = RoundedCornerShape(4.dp),
@@ -57,5 +58,5 @@ fun ClientListScreen(
 @Preview
 @Composable
 fun ClientsListScreenPreview() {
-    ClientListScreen()
+    ClientListScreen({})
 }

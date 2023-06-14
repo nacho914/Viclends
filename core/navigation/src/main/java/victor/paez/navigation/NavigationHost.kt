@@ -7,6 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import victor.paez.clientList.view.ClientListScreen
+import victor.paez.clientdetail.view.ClientDetailScreen
 import victor.paez.dashboard.view.DashboardScreen
 
 @Composable
@@ -22,7 +23,15 @@ fun NavigationHost() {
         }
 
         composable(Destinations.ClientListScreen.route) {
-            ClientListScreen()
+            ClientListScreen(
+                navClientDetail = { clientId ->
+                    navController.navigate(Destinations.ClientDetailScreen.createRoute(clientId))
+                },
+            )
+        }
+
+        composable(Destinations.ClientDetailScreen.route) { backStackEntry ->
+            ClientDetailScreen(backStackEntry.arguments?.getString(CLIENT_ID).orEmpty())
         }
     }
 }
