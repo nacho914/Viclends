@@ -10,18 +10,20 @@ import victor.paez.client.START_DATE
 import java.util.Date
 
 data class ClientDTO(
-    val name: String = "",
-    val phone: String = "",
-    val debt: Int = 0,
-    val revenue: Int = 0,
-    val birthday: Date?,
-    val startDate: Date?,
+    val id: String? = "",
+    val name: String? = "",
+    val phone: String? = "",
+    val debt: Int? = 0,
+    val revenue: Int? = 0,
+    val birthday: Date? = null,
+    val startDate: Date? = null,
 ) {
     companion object {
         fun getClientDTO(
             document: DocumentSnapshot,
         ): ClientDTO =
             ClientDTO(
+                id = document.id,
                 name = document.getString(NAME_FIREBASE).orEmpty(),
                 phone = document.getString(PHONE_FIREBASE).orEmpty(),
                 debt = document.getLong(DEBT_FIREBASE)?.toInt() ?: 0,

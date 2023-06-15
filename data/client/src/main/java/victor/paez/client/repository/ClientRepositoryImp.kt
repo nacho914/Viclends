@@ -10,4 +10,5 @@ class ClientRepositoryImp
     private val firestoreDataSource: ClientDatasource,
 ) : ClientRepository {
     override fun getClientList(): Flow<List<ClientDTO>> = firestoreDataSource.getClientList()
+    override suspend fun getClient(clientId: String): Flow<ClientDTO> = firestoreDataSource.getClient(clientId)
 }

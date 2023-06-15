@@ -5,4 +5,5 @@ import victor.paez.client.model.ClientDTO
 
 interface ClientDatasource {
     fun getClientList(): Flow<List<ClientDTO>>
+    fun getClient(clientId: String): Flow<ClientDTO>
 }

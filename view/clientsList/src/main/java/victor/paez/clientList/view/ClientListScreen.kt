@@ -36,7 +36,7 @@ fun ClientListScreen(
     LazyColumn(modifier = Modifier.fillMaxSize()) {
         items(clientList) { client ->
             Surface(
-                onClick = { navClientDetail(client.name) },
+                onClick = { navClientDetail(client.id) },
                 modifier = Modifier
                     .padding(8.dp),
                 shape = RoundedCornerShape(4.dp),

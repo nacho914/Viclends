@@ -5,4 +5,5 @@ import victor.paez.client.model.ClientDTO
 
 interface ClientRepository {
     fun getClientList(): Flow<List<ClientDTO>>
+    suspend fun getClient(clientId: String): Flow<ClientDTO>
 }
