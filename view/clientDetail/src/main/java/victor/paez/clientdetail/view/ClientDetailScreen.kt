@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -18,14 +19,15 @@ import victor.paez.ui.LoadingWheel
 
 @Composable
 fun ClientDetailScreen(
-    idClient: String,
+    clientId: String,
+    navAccountList: (clientId: String) -> Unit,
     clientDetailViewModel: ClientDetailViewModel = hiltViewModel(),
 ) {
     val name = clientDetailViewModel.clientDetail.value.name
     val isLoading: Boolean by clientDetailViewModel.isLoading
 
-    LaunchedEffect(idClient) {
-        clientDetailViewModel.getClientDetail(idClient)
+    LaunchedEffect(clientId) {
+        clientDetailViewModel.getClientDetail(clientId)
     }
 
     if (isLoading) {
@@ -51,6 +53,15 @@ fun ClientDetailScreen(
             Text(
                 text = name,
             )
+        }
+
+        Row(
+            modifier = Modifier.fillMaxWidth().padding(bottom = 16.dp),
+            horizontalArrangement = Arrangement.Center,
+        ) {
+            Button(onClick = { navAccountList(clientId) }) {
+                Text(text = "Listado de cuentas")
+            }
         }
     }
 }

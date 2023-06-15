@@ -60,6 +60,7 @@ dependencies {
     implementation(project(":view:dashboard"))
     implementation(project(":view:clientsList"))
     implementation(project(":view:clientDetail"))
+    implementation(project(":view:accountList"))
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'

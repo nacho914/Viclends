@@ -6,6 +6,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import victor.paez.acountlist.view.AccountListScreen
 import victor.paez.clientList.view.ClientListScreen
 import victor.paez.clientdetail.view.ClientDetailScreen
 import victor.paez.dashboard.view.DashboardScreen
@@ -31,7 +32,16 @@ fun NavigationHost() {
         }
 
         composable(Destinations.ClientDetailScreen.route) { backStackEntry ->
-            ClientDetailScreen(backStackEntry.arguments?.getString(CLIENT_ID).orEmpty())
+            ClientDetailScreen(
+                navAccountList = { clientId ->
+                    navController.navigate(Destinations.AccountListScreen.createRoute(clientId))
+                },
+                clientId = backStackEntry.arguments?.getString(CLIENT_ID).orEmpty(),
+            )
+        }
+
+        composable(Destinations.AccountListScreen.route) { backStackEntry ->
+            AccountListScreen(backStackEntry.arguments?.getString(CLIENT_ID).orEmpty())
         }
     }
 }
