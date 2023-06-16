@@ -10,6 +10,7 @@ import victor.paez.acountlist.view.AccountListScreen
 import victor.paez.clientList.view.ClientListScreen
 import victor.paez.clientdetail.view.ClientDetailScreen
 import victor.paez.dashboard.view.DashboardScreen
+import victor.paez.paymentlist.view.PaymentListScreen
 
 @Composable
 fun NavigationHost() {
@@ -41,7 +42,16 @@ fun NavigationHost() {
         }
 
         composable(Destinations.AccountListScreen.route) { backStackEntry ->
-            AccountListScreen(backStackEntry.arguments?.getString(CLIENT_ID).orEmpty())
+            AccountListScreen(
+                clientId = backStackEntry.arguments?.getString(CLIENT_ID).orEmpty(),
+                navPaymentList = { accountId ->
+                    navController.navigate(Destinations.PaymentListScreen.createRoute(accountId))
+                },
+            )
+        }
+
+        composable(Destinations.PaymentListScreen.route) { backStackEntry ->
+            PaymentListScreen(backStackEntry.arguments?.getString(ACCOUNT_ID).orEmpty())
         }
     }
 }

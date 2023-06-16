@@ -1,4 +1,4 @@
-package victor.paez.acountlist.view
+package victor.paez.paymentlist.view
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -18,21 +18,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import victor.paez.acountlist.viewmodel.AccountListViewModel
+import victor.paez.paymentlist.viewmodel.PaymentListViewModel
 import victor.paez.ui.LoadingWheel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AccountListScreen(
-    clientId: String,
-    navPaymentList: (accountId: String) -> Unit,
-    accountListViewModel: AccountListViewModel = hiltViewModel(),
+fun PaymentListScreen(
+    accountId: String,
+    paymentListViewModel: PaymentListViewModel = hiltViewModel(),
 ) {
-    val accountList by accountListViewModel.accountList
-    val isLoading: Boolean by accountListViewModel.isLoading
+    val paymentList by paymentListViewModel.paymentList
+    val isLoading: Boolean by paymentListViewModel.isLoading
 
-    LaunchedEffect(clientId) {
-        accountListViewModel.getAccountList(clientId)
+    LaunchedEffect(accountId) {
+        paymentListViewModel.getPaymentList(accountId)
     }
 
     if (isLoading) {
@@ -40,9 +39,9 @@ fun AccountListScreen(
     }
 
     LazyColumn(modifier = Modifier.fillMaxSize()) {
-        items(accountList) { account ->
+        items(paymentList) { payment ->
             Surface(
-                onClick = { navPaymentList(account.id.orEmpty()) },
+                onClick = {},
                 modifier = Modifier.padding(8.dp),
                 shape = RoundedCornerShape(4.dp),
                 color = Color.LightGray,
@@ -53,7 +52,7 @@ fun AccountListScreen(
                         .padding(16.dp),
                     horizontalArrangement = Arrangement.Center,
                 ) {
-                    Text(text = account.name.orEmpty())
+                    Text(text = payment.total.toString())
                 }
             }
         }

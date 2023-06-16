@@ -17,6 +17,7 @@
             <option value="$PROJECT_DIR$/data" />
             <option value="$PROJECT_DIR$/data/account" />
             <option value="$PROJECT_DIR$/data/client" />
+            <option value="$PROJECT_DIR$/data/payment" />
             <option value="$PROJECT_DIR$/data/resumeInformation" />
             <option value="$PROJECT_DIR$/data/useCases" />
             <option value="$PROJECT_DIR$/view" />
@@ -24,6 +25,7 @@
             <option value="$PROJECT_DIR$/view/clientDetail" />
             <option value="$PROJECT_DIR$/view/clientsList" />
             <option value="$PROJECT_DIR$/view/dashboard" />
+            <option value="$PROJECT_DIR$/view/paymentList" />
             <option value="$PROJECT_DIR$/view/ui" />
           </set>
         </option>
