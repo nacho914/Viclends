@@ -10,7 +10,7 @@ import javax.inject.Inject
 class GetResumeDataUseCase @Inject constructor(
     private val resumeInformationRepository: ResumeInformationRepository,
 ) {
-    operator fun invoke(): Flow<DashboardData> {
+    suspend operator fun invoke(): Flow<DashboardData> {
         return resumeInformationRepository.getResumeInformation().map { value: ResumeInformation ->
             DashboardData.fromResumeInformationToDashboardData(value)
         }

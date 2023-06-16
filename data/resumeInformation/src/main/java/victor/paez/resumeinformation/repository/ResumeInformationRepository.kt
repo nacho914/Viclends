@@ -4,5 +4,5 @@ import kotlinx.coroutines.flow.Flow
 import victor.paez.resumeinformation.model.ResumeInformation
 
 interface ResumeInformationRepository {
-    fun getResumeInformation(): Flow<ResumeInformation>
+    suspend fun getResumeInformation(): Flow<ResumeInformation>
 }

@@ -9,7 +9,7 @@ import javax.inject.Inject
 class GetClientListUseCase @Inject constructor(
     private val clientRepository: ClientRepository,
 ) {
-    operator fun invoke(): Flow<List<ClientListUI>> {
+    suspend operator fun invoke(): Flow<List<ClientListUI>> {
         return clientRepository.getClientList().map { clientList ->
             clientList.map { ClientListUI.fromClientDtoToClientListUI(it) }
         }

@@ -9,7 +9,7 @@ import javax.inject.Inject
 class GetAccountListUseCase @Inject constructor(
     private val accountRepository: AccountRepository,
 ) {
-    operator fun invoke(clientId: String): Flow<List<AccountListUI>> {
+    suspend operator fun invoke(clientId: String): Flow<List<AccountListUI>> {
         return accountRepository.getAccountList(clientId).map { accountList ->
             accountList.map { AccountListUI.fromAccountDtoToAccountListUI(it) }
         }

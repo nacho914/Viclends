@@ -4,6 +4,6 @@ import kotlinx.coroutines.flow.Flow
 import victor.paez.client.model.ClientDTO
 
 interface ClientRepository {
-    fun getClientList(): Flow<List<ClientDTO>>
-    fun getClient(clientId: String): Flow<ClientDTO>
+    suspend fun getClientList(): Flow<List<ClientDTO>>
+    suspend fun getClient(clientId: String): Flow<ClientDTO>
 }
