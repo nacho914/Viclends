@@ -12,9 +12,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import victor.paez.dashboard.R
 import victor.paez.dashboard.viewmodel.DashboardViewModel
 import victor.paez.ui.LoadingWheel
 import victor.paez.usecases.dashboard.model.DashboardData
@@ -22,9 +23,12 @@ import victor.paez.usecases.dashboard.model.DashboardData
 @Composable
 fun DashboardScreen(
     innerPadding: PaddingValues,
+    changeTitle: (String) -> Unit,
     navClientList: () -> Unit,
     dashboardViewModel: DashboardViewModel = hiltViewModel(),
 ) {
+    changeTitle(stringResource(id = R.string.app_name))
+
     val dashboardData: DashboardData by dashboardViewModel.dashboardData
     val isLoading: Boolean by dashboardViewModel.isLoading
 
@@ -116,13 +120,4 @@ fun DashboardScreen(
             }
         }
     }
-}
-
-@Preview(showSystemUi = true)
-@Composable
-fun DashboardPreview() {
-    DashboardScreen(
-        PaddingValues(16.dp),
-        {},
-    )
 }

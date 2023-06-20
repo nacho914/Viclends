@@ -15,4 +15,6 @@ sealed class Destinations(
     object PaymentListScreen : Destinations("paymentListScreen/{$ACCOUNT_ID}") {
         fun createRoute(accountId: String) = "paymentListScreen/$accountId"
     }
+
+    object ClientAddScreen : Destinations("clientAddScreen")
 }
