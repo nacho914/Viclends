@@ -35,6 +35,9 @@ fun NavigationHost(
                 navClientDetail = { clientId ->
                     navController.navigate(Destinations.ClientDetailScreen.createRoute(clientId))
                 },
+                navAddClient = {
+                    navController.navigate(Destinations.ClientAddScreen.route)
+                },
             )
         }
 
@@ -61,7 +64,7 @@ fun NavigationHost(
         }
 
         composable(Destinations.ClientAddScreen.route) {
-            AddClientScreen()
+            AddClientScreen(padding)
         }
     }
 }

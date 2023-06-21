@@ -31,6 +31,7 @@ fun ClientListScreen(
     padding: PaddingValues,
     changeTitle: (String) -> Unit,
     navClientDetail: (clientId: String) -> Unit,
+    navAddClient: () -> Unit,
     dashboardViewModel: ClientListViewModel = hiltViewModel(),
 ) {
     changeTitle(stringResource(id = R.string.screen_name))
@@ -67,6 +68,8 @@ fun ClientListScreen(
                 }
             }
         }
-        FABAdd(padding = padding) {}
+        FABAdd(padding = padding) {
+            navAddClient()
+        }
     }
 }
