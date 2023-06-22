@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="name_text">Nombre</string>
+    <string name="phone_text">Telefono</string>
+    <string name="birthday_text">Fecha de nacimiento:</string>
+    <string name="start_date_text">Fecha de inicio:</string>
+</resources>
