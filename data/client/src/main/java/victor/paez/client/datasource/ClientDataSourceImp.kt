@@ -7,6 +7,7 @@ import kotlinx.coroutines.flow.flow
 import victor.paez.client.CLIENT_PATH
 import victor.paez.client.MAIN_PATH
 import victor.paez.client.MASTER_ID
+import victor.paez.client.model.ClientAddDTO
 import victor.paez.client.model.ClientDTO
 import javax.inject.Inject
 import kotlin.coroutines.resume
@@ -54,4 +55,22 @@ class ClientDataSourceImp @Inject constructor(
             }
             emit(client)
         }
+
+    override fun addClient(client: ClientAddDTO): Flow<Boolean> = flow {
+        val bResponse = suspendCoroutine { response ->
+            firestore
+                .collection(MAIN_PATH)
+                .document(MASTER_ID)
+                .collection(CLIENT_PATH)
+                .add(client)
+                .addOnSuccessListener { _ ->
+                    response.resume(true)
+                }
+                .addOnFailureListener { _ ->
+                    response.resume(false)
+                }
+        }
+
+        emit(bResponse)
+    }
 }

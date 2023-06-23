@@ -1,19 +1,19 @@
-package victor.paez.usecases.dashboard.model
+package victor.paez.usecases.model
 
 import victor.paez.client.model.ClientDTO
 import java.util.Date
 
-data class ClientUI(
+data class ClientListUI(
     val id: String = "",
     val name: String = "",
     val debt: Int = 0,
     val revenue: Int = 0,
-    val birthday: Date? = null,
+    val birthday: Date?,
 ) {
     companion object {
-        fun fromClientDtoToClientUI(clientDTO: ClientDTO):
-            ClientUI =
-            ClientUI(
+        fun fromClientDtoToClientListUI(clientDTO: ClientDTO):
+            ClientListUI =
+            ClientListUI(
                 id = clientDTO.id.orEmpty(),
                 name = clientDTO.name.orEmpty(),
                 debt = clientDTO.debt ?: 0,

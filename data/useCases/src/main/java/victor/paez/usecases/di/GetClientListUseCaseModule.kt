@@ -1,11 +1,11 @@
-package victor.paez.usecases.dashboard.di
+package victor.paez.usecases.di
 
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import victor.paez.client.repository.ClientRepository
-import victor.paez.usecases.dashboard.GetClientListUseCase
+import victor.paez.usecases.GetClientListUseCase
 import javax.inject.Singleton
 
 @Module

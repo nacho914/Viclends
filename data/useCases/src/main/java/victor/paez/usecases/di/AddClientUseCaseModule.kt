@@ -1,19 +1,19 @@
-package victor.paez.usecases.dashboard.di
+package victor.paez.usecases.di
 
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import victor.paez.client.repository.ClientRepository
-import victor.paez.usecases.dashboard.GetClientUseCase
+import victor.paez.usecases.AddClientUseCase
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class GetClientUseCaseModule {
+class AddClientUseCaseModule {
     @Provides
     @Singleton
-    fun provideGetClientUseCase(clientRepository: ClientRepository):
-        GetClientUseCase =
-        GetClientUseCase(clientRepository)
+    fun provideAddClientUseCase(clientRepository: ClientRepository):
+        AddClientUseCase =
+        AddClientUseCase(clientRepository)
 }

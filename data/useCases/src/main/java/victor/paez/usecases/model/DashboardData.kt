@@ -1,4 +1,4 @@
-package victor.paez.usecases.dashboard.model
+package victor.paez.usecases.model
 
 import victor.paez.resumeinformation.model.ResumeInformation
 

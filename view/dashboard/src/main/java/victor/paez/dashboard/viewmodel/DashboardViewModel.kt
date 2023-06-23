@@ -5,8 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import victor.paez.usecases.dashboard.GetResumeDataUseCase
-import victor.paez.usecases.dashboard.model.DashboardData
+import victor.paez.usecases.GetResumeDataUseCase
+import victor.paez.usecases.model.DashboardData
 import javax.inject.Inject
 
 @HiltViewModel

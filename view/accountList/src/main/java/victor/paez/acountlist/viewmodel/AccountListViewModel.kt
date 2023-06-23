@@ -5,8 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import victor.paez.usecases.dashboard.GetAccountListUseCase
-import victor.paez.usecases.dashboard.model.AccountListUI
+import victor.paez.usecases.GetAccountListUseCase
+import victor.paez.usecases.model.AccountListUI
 import javax.inject.Inject
 
 @HiltViewModel

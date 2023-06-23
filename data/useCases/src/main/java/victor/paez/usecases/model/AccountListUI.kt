@@ -1,4 +1,4 @@
-package victor.paez.usecases.dashboard.model
+package victor.paez.usecases.model
 
 import victor.paez.account.model.AccountDTO
 import java.util.Date

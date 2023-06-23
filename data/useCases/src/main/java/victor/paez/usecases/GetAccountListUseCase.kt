@@ -1,9 +1,9 @@
-package victor.paez.usecases.dashboard
+package victor.paez.usecases
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import victor.paez.account.repository.AccountRepository
-import victor.paez.usecases.dashboard.model.AccountListUI
+import victor.paez.usecases.model.AccountListUI
 import javax.inject.Inject
 
 class GetAccountListUseCase @Inject constructor(

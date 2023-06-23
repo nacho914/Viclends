@@ -1,9 +1,9 @@
-package victor.paez.usecases.dashboard
+package victor.paez.usecases
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import victor.paez.payment.repository.PaymentRepository
-import victor.paez.usecases.dashboard.model.PaymentListUI
+import victor.paez.usecases.model.PaymentListUI
 import javax.inject.Inject
 
 class GetPaymentListUseCase @Inject constructor(

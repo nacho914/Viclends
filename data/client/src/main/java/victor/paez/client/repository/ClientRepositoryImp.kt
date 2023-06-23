@@ -4,6 +4,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 import victor.paez.client.datasource.ClientDatasource
+import victor.paez.client.model.ClientAddDTO
 import victor.paez.client.model.ClientDTO
 import javax.inject.Inject
 
@@ -18,5 +19,9 @@ class ClientRepositoryImp
 
     override suspend fun getClient(clientId: String): Flow<ClientDTO> = withContext(dispatcher) {
         firestoreDataSource.getClient(clientId)
+    }
+
+    override suspend fun addClient(client: ClientAddDTO): Flow<Boolean> = withContext(dispatcher) {
+        firestoreDataSource.addClient(client)
     }
 }

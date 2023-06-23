@@ -1,10 +1,10 @@
-package victor.paez.usecases.dashboard
+package victor.paez.usecases
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import victor.paez.resumeinformation.model.ResumeInformation
 import victor.paez.resumeinformation.repository.ResumeInformationRepository
-import victor.paez.usecases.dashboard.model.DashboardData
+import victor.paez.usecases.model.DashboardData
 import javax.inject.Inject
 
 class GetResumeDataUseCase @Inject constructor(

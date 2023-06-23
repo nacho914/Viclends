@@ -18,7 +18,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import victor.paez.dashboard.R
 import victor.paez.dashboard.viewmodel.DashboardViewModel
 import victor.paez.ui.LoadingWheel
-import victor.paez.usecases.dashboard.model.DashboardData
+import victor.paez.usecases.model.DashboardData
 
 @Composable
 fun DashboardScreen(

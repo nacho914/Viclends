@@ -5,8 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import victor.paez.usecases.dashboard.GetPaymentListUseCase
-import victor.paez.usecases.dashboard.model.PaymentListUI
+import victor.paez.usecases.GetPaymentListUseCase
+import victor.paez.usecases.model.PaymentListUI
 import javax.inject.Inject
 
 @HiltViewModel
