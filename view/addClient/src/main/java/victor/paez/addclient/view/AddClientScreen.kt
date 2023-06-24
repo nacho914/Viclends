@@ -23,6 +23,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import victor.paez.addclient.R
 import victor.paez.addclient.viewmodel.AddClientViewModel
 import victor.paez.ui.LoadingWheel
+import victor.paez.ui.MainAlertDialog
 
 @RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalMaterial3Api::class)
@@ -31,7 +32,8 @@ fun AddClientScreen(
     padding: PaddingValues,
     addClientViewModel: AddClientViewModel = hiltViewModel(),
 ) {
-    var isLoading = addClientViewModel.isLoading.value
+    val isLoading = addClientViewModel.isLoading.value
+    val isClientAdd = addClientViewModel.isClientAdd.value
 
     val birthdayPickerState = rememberDatePickerState(initialDisplayMode = DisplayMode.Input)
     val startDatePickerState = rememberDatePickerState(initialDisplayMode = DisplayMode.Input)
@@ -43,8 +45,19 @@ fun AddClientScreen(
         LoadingWheel()
     }
 
+    MainAlertDialog(
+        showDialog = isClientAdd,
+        title = stringResource(id = R.string.alert_positive_title),
+        textBody = stringResource(id = R.string.alert_positive_text),
+        confirmText = stringResource(id = R.string.alert_positive_response),
+    ) {
+        addClientViewModel.addConfirm()
+    }
+
     Column(
-        modifier = Modifier.fillMaxSize().padding(padding),
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(padding),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         TextField(
