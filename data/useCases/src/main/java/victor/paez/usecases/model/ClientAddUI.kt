@@ -1,7 +1,7 @@
 package victor.paez.usecases.model
 
 import victor.paez.client.model.ClientAddDTO
-import java.util.Date
+import victor.paez.util.getCalendarTime
 
 data class ClientAddUI(
     var name: String = "",
@@ -15,8 +15,8 @@ data class ClientAddUI(
             ClientAddDTO(
                 name = clientAddUI.name,
                 phone = clientAddUI.phone,
-                birthday = Date(clientAddUI.birthday),
-                startDate = Date(clientAddUI.startDate),
+                birthday = getCalendarTime(clientAddUI.birthday),
+                startDate = getCalendarTime(clientAddUI.startDate),
             )
     }
 }
