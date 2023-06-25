@@ -23,13 +23,29 @@ class AddClientViewModel @Inject constructor(
     var isLoading = mutableStateOf(false)
         private set
 
+    var isWrongPhoneFormat = mutableStateOf(false)
+        private set
+
+    var isWrongNameFormat = mutableStateOf(false)
+        private set
+
     var isClientAdd = mutableStateOf(false)
         private set
 
     fun isEnable() = nameClient.value != "" &&
         phoneClient.value != "" &&
         client.value.birthday != 0L &&
-        client.value.startDate != 0L
+        client.value.startDate != 0L &&
+        !isWrongPhoneFormat.value &&
+        !isWrongNameFormat.value
+
+    fun checkPhoneFormat(phone: String) {
+        isWrongPhoneFormat.value = !phone.matches(Regex("^\\d{2}-\\d{4}-\\d{2}-\\d{2}-\\d{2}$"))
+    }
+
+    fun checkNameFormat(name: String) {
+        isWrongNameFormat.value = !name.matches(Regex("^(?:\\p{Lu}[\\p{L} ]*)?\$"))
+    }
 
     fun addClient() {
         isLoading.value = true

@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.DatePicker
 import androidx.compose.material3.DisplayMode
@@ -18,6 +19,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import victor.paez.addclient.R
@@ -64,18 +66,27 @@ fun AddClientScreen(
             value = addClientViewModel.nameClient.value,
             onValueChange = {
                 addClientViewModel.nameClient.value = it
+                addClientViewModel.checkNameFormat(it)
             },
             label = { Text(text = stringResource(id = R.string.name_text)) },
             modifier = Modifier.padding(16.dp),
+            maxLines = 1,
+            keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Text),
+            isError = addClientViewModel.isWrongNameFormat.value,
         )
 
         TextField(
             value = addClientViewModel.phoneClient.value,
             onValueChange = {
                 addClientViewModel.phoneClient.value = it
+                addClientViewModel.checkPhoneFormat(it)
             },
             label = { Text(text = stringResource(id = R.string.phone_text)) },
             modifier = Modifier.padding(16.dp),
+            maxLines = 1,
+            keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Phone),
+            isError = addClientViewModel.isWrongPhoneFormat.value,
+            placeholder = { Text("XX-XXXX-XX-XX-XX") },
         )
 
         Text(
