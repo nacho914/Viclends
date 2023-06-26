@@ -44,7 +44,14 @@ class AddClientViewModel @Inject constructor(
     }
 
     fun checkNameFormat(name: String) {
-        isWrongNameFormat.value = !name.matches(Regex("^(?:\\p{Lu}[\\p{L} ]*)?\$"))
+        var isWrong = false
+        name.split(" ").forEach {
+            if (!it.matches(Regex("^(?:\\p{Lu}[\\p{L} ]*)?\$"))) {
+                isWrong = true
+                return@forEach
+            }
+        }
+        isWrongNameFormat.value = isWrong
     }
 
     fun addClient() {
