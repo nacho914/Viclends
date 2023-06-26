@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.DatePicker
@@ -24,6 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import victor.paez.addclient.R
 import victor.paez.addclient.viewmodel.AddClientViewModel
+import victor.paez.ui.GalleryButton
 import victor.paez.ui.LoadingWheel
 import victor.paez.ui.MainAlertDialog
 
@@ -55,76 +57,86 @@ fun AddClientScreen(
     ) {
         addClientViewModel.addConfirm()
     }
-
-    Column(
+    LazyColumn(
         modifier = Modifier
-            .fillMaxSize()
-            .padding(padding),
+            .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        TextField(
-            value = addClientViewModel.nameClient.value,
-            onValueChange = {
-                addClientViewModel.nameClient.value = it
-                addClientViewModel.checkNameFormat(it)
-            },
-            label = { Text(text = stringResource(id = R.string.name_text)) },
-            modifier = Modifier.padding(16.dp),
-            maxLines = 1,
-            keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Text),
-            isError = addClientViewModel.isWrongNameFormat.value,
-        )
+        item {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(padding),
+                horizontalAlignment = Alignment.CenterHorizontally,
+            ) {
+                GalleryButton()
 
-        TextField(
-            value = addClientViewModel.phoneClient.value,
-            onValueChange = {
-                addClientViewModel.phoneClient.value = it
-                addClientViewModel.checkPhoneFormat(it)
-            },
-            label = { Text(text = stringResource(id = R.string.phone_text)) },
-            modifier = Modifier.padding(16.dp),
-            maxLines = 1,
-            keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Phone),
-            isError = addClientViewModel.isWrongPhoneFormat.value,
-            placeholder = { Text("XX-XXXX-XX-XX-XX") },
-        )
+                TextField(
+                    value = addClientViewModel.nameClient.value,
+                    onValueChange = {
+                        addClientViewModel.nameClient.value = it
+                        addClientViewModel.checkNameFormat(it)
+                    },
+                    label = { Text(text = stringResource(id = R.string.name_text)) },
+                    modifier = Modifier.padding(16.dp),
+                    maxLines = 1,
+                    keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Text),
+                    isError = addClientViewModel.isWrongNameFormat.value,
+                )
 
-        Text(
-            text = stringResource(id = R.string.birthday_text),
-            modifier = Modifier
-                .fillMaxWidth()
-                .align(Alignment.Start)
-                .padding(start = 32.dp, top = 16.dp),
-        )
-        DatePicker(
-            showModeToggle = false,
-            state = birthdayPickerState,
-            title = null,
-            headline = null,
-            modifier = Modifier.padding(horizontal = 16.dp),
-        )
+                TextField(
+                    value = addClientViewModel.phoneClient.value,
+                    onValueChange = {
+                        addClientViewModel.phoneClient.value = it
+                        addClientViewModel.checkPhoneFormat(it)
+                    },
+                    label = { Text(text = stringResource(id = R.string.phone_text)) },
+                    modifier = Modifier.padding(16.dp),
+                    maxLines = 1,
+                    keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Phone),
+                    isError = addClientViewModel.isWrongPhoneFormat.value,
+                    placeholder = { Text("XX-XXXX-XX-XX-XX") },
+                )
 
-        Text(
-            text = stringResource(id = R.string.start_date_text),
-            modifier = Modifier
-                .fillMaxWidth()
-                .align(Alignment.Start)
-                .padding(start = 32.dp, top = 16.dp),
-        )
-        DatePicker(
-            showModeToggle = false,
-            state = startDatePickerState,
-            title = null,
-            headline = null,
-            modifier = Modifier.padding(horizontal = 16.dp),
+                Text(
+                    text = stringResource(id = R.string.birthday_text),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .align(Alignment.Start)
+                        .padding(start = 32.dp, top = 16.dp),
+                )
+                DatePicker(
+                    showModeToggle = false,
+                    state = birthdayPickerState,
+                    title = null,
+                    headline = null,
+                    modifier = Modifier.padding(horizontal = 16.dp),
+                )
 
-        )
+                Text(
+                    text = stringResource(id = R.string.start_date_text),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .align(Alignment.Start)
+                        .padding(start = 32.dp, top = 16.dp),
+                )
+                DatePicker(
+                    showModeToggle = false,
+                    state = startDatePickerState,
+                    title = null,
+                    headline = null,
+                    modifier = Modifier.padding(horizontal = 16.dp),
 
-        Button(
-            onClick = { addClientViewModel.addClient() },
-            enabled = addClientViewModel.isEnable(),
-        ) {
-            Text(text = "Agregar cliente")
+                )
+
+                Button(
+                    onClick = { addClientViewModel.addClient() },
+                    enabled = addClientViewModel.isEnable(),
+                    modifier = Modifier.padding(16.dp),
+                ) {
+                    Text(text = "Agregar cliente")
+                }
+            }
         }
     }
 }
