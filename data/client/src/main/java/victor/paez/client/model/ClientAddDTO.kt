@@ -9,4 +9,5 @@ data class ClientAddDTO(
     val revenue: Int? = 0,
     val birthday: Date? = null,
     val startDate: Date? = null,
+    val imgUrl: String = "",
 )

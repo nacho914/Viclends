@@ -47,6 +47,7 @@ dependencies {
     implementation(project("::data:client"))
     implementation(project("::data:account"))
     implementation(project("::data:payment"))
+    implementation(project("::data:image"))
 
     //Android Hilt
     implementation "com.google.dagger:hilt-android:2.44"

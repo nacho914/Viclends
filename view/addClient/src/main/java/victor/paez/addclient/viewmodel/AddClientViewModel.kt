@@ -1,5 +1,6 @@
 package victor.paez.addclient.viewmodel
 
+import android.net.Uri
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -20,6 +21,8 @@ class AddClientViewModel @Inject constructor(
         private set
     var phoneClient = mutableStateOf("")
         private set
+
+    var imageUrl = mutableStateOf<Uri?>(null)
     var isLoading = mutableStateOf(false)
         private set
 
@@ -59,8 +62,10 @@ class AddClientViewModel @Inject constructor(
         viewModelScope.launch {
             client.value.name = nameClient.value
             client.value.phone = phoneClient.value
-            addClientUseCase(client.value).collect {
-                isClientAdd.value = it
+            imageUrl.value?.let { imageUri ->
+                addClientUseCase(client.value, imageUri).collect {
+                    isClientAdd.value = it
+                }
             }
             isClientAdd.value = true
             isLoading.value = false

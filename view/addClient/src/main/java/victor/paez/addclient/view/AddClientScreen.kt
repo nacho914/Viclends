@@ -1,7 +1,5 @@
 package victor.paez.addclient.view
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -25,11 +23,10 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import victor.paez.addclient.R
 import victor.paez.addclient.viewmodel.AddClientViewModel
+import victor.paez.ui.BlockingLoadingWheel
 import victor.paez.ui.GalleryButton
-import victor.paez.ui.LoadingWheel
 import victor.paez.ui.MainAlertDialog
 
-@RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddClientScreen(
@@ -44,10 +41,6 @@ fun AddClientScreen(
 
     addClientViewModel.client.value.birthday = birthdayPickerState.selectedDateMillis ?: 0L
     addClientViewModel.client.value.startDate = startDatePickerState.selectedDateMillis ?: 0L
-
-    if (isLoading) {
-        LoadingWheel()
-    }
 
     MainAlertDialog(
         showDialog = isClientAdd,
@@ -69,7 +62,9 @@ fun AddClientScreen(
                     .padding(padding),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
-                GalleryButton()
+                GalleryButton { uri ->
+                    addClientViewModel.imageUrl.value = uri
+                }
 
                 TextField(
                     value = addClientViewModel.nameClient.value,
@@ -138,5 +133,9 @@ fun AddClientScreen(
                 }
             }
         }
+    }
+
+    if (isLoading) {
+        BlockingLoadingWheel()
     }
 }

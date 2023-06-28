@@ -18,6 +18,7 @@
             <option value="$PROJECT_DIR$/data" />
             <option value="$PROJECT_DIR$/data/account" />
             <option value="$PROJECT_DIR$/data/client" />
+            <option value="$PROJECT_DIR$/data/image" />
             <option value="$PROJECT_DIR$/data/payment" />
             <option value="$PROJECT_DIR$/data/resumeInformation" />
             <option value="$PROJECT_DIR$/data/useCases" />

@@ -22,13 +22,16 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 
 @Composable
-fun GalleryButton() {
+fun GalleryButton(
+    onImageSelected: (Uri?) -> Unit
+) {
     val selectedImageUri = remember { mutableStateOf<Uri?>(null) }
 
     val launcher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.GetContent(),
         onResult = { uri: Uri? ->
             selectedImageUri.value = uri
+            onImageSelected(uri)
         },
     )
 
