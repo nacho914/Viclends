@@ -15,4 +15,8 @@ class ResumeInformationRepositoryImp
     override suspend fun getResumeInformation(): Flow<ResumeInformation> = withContext(dispatcher) {
         firestoreDataSource.getResumeInformation()
     }
+
+    override suspend fun addClient(): Boolean = withContext(dispatcher) {
+        firestoreDataSource.addClient()
+    }
 }

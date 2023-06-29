@@ -40,7 +40,8 @@ class AddClientViewModel @Inject constructor(
         client.value.birthday != 0L &&
         client.value.startDate != 0L &&
         !isWrongPhoneFormat.value &&
-        !isWrongNameFormat.value
+        !isWrongNameFormat.value &&
+        imageUrl.value != null
 
     fun checkPhoneFormat(phone: String) {
         isWrongPhoneFormat.value = !phone.matches(Regex("^\\d{2}-\\d{4}-\\d{2}-\\d{2}-\\d{2}$"))

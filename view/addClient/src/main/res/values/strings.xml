@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="add_client_screen">Agregar cliente</string>
     <string name="name_text">Nombre</string>
     <string name="phone_text">Telefono</string>
     <string name="birthday_text">Fecha de nacimiento:</string>
     <string name="start_date_text">Fecha de inicio:</string>
+    <string name="number_placeholder">XX-XXXX-XX-XX-XX</string>
+    <string name="add_client_button">Agregar cliente</string>
 
     <string name="alert_positive_title">Cliente Agregado</string>
     <string name="alert_positive_text">El cliente fue agregado con exito, puede continuar</string>

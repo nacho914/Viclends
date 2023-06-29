@@ -23,9 +23,14 @@ import coil.compose.AsyncImage
 
 @Composable
 fun GalleryButton(
-    onImageSelected: (Uri?) -> Unit
+    clearImage: Boolean,
+    onImageSelected: (Uri?) -> Unit,
 ) {
     val selectedImageUri = remember { mutableStateOf<Uri?>(null) }
+
+    if (clearImage) {
+        selectedImageUri.value = null
+    }
 
     val launcher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.GetContent(),

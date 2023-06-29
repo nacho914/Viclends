@@ -31,12 +31,15 @@ import victor.paez.ui.MainAlertDialog
 @Composable
 fun AddClientScreen(
     padding: PaddingValues,
+    changeTitle: (String) -> Unit,
     addClientViewModel: AddClientViewModel = hiltViewModel(),
 ) {
     val isLoading = addClientViewModel.isLoading.value
     val isClientAdd = addClientViewModel.isClientAdd.value
 
-    val birthdayPickerState = rememberDatePickerState(initialDisplayMode = DisplayMode.Input)
+    changeTitle(stringResource(id = R.string.add_client_screen))
+
+    var birthdayPickerState = rememberDatePickerState(initialDisplayMode = DisplayMode.Input)
     val startDatePickerState = rememberDatePickerState(initialDisplayMode = DisplayMode.Input)
 
     addClientViewModel.client.value.birthday = birthdayPickerState.selectedDateMillis ?: 0L
@@ -62,7 +65,7 @@ fun AddClientScreen(
                     .padding(padding),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
-                GalleryButton { uri ->
+                GalleryButton(isClientAdd) { uri ->
                     addClientViewModel.imageUrl.value = uri
                 }
 
@@ -90,7 +93,7 @@ fun AddClientScreen(
                     maxLines = 1,
                     keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Phone),
                     isError = addClientViewModel.isWrongPhoneFormat.value,
-                    placeholder = { Text("XX-XXXX-XX-XX-XX") },
+                    placeholder = { Text(stringResource(id = R.string.number_placeholder)) },
                 )
 
                 Text(
@@ -129,7 +132,7 @@ fun AddClientScreen(
                     enabled = addClientViewModel.isEnable(),
                     modifier = Modifier.padding(16.dp),
                 ) {
-                    Text(text = "Agregar cliente")
+                    Text(text = stringResource(id = R.string.add_client_button))
                 }
             }
         }

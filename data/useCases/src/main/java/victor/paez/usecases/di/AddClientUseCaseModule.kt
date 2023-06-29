@@ -6,6 +6,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import victor.paez.client.repository.ClientRepository
 import victor.paez.image.repository.ImageRepository
+import victor.paez.resumeinformation.repository.ResumeInformationRepository
 import victor.paez.usecases.AddClientUseCase
 import javax.inject.Singleton
 
@@ -17,7 +18,8 @@ class AddClientUseCaseModule {
     fun provideAddClientUseCase(
         clientRepository: ClientRepository,
         imageRepository: ImageRepository,
+        resumeInformationRepository: ResumeInformationRepository,
     ):
         AddClientUseCase =
-        AddClientUseCase(clientRepository, imageRepository)
+        AddClientUseCase(clientRepository, imageRepository, resumeInformationRepository)
 }

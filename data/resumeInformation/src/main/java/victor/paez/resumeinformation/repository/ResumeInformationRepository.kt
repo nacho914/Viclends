@@ -5,4 +5,6 @@ import victor.paez.resumeinformation.model.ResumeInformation
 
 interface ResumeInformationRepository {
     suspend fun getResumeInformation(): Flow<ResumeInformation>
+
+    suspend fun addClient(): Boolean
 }

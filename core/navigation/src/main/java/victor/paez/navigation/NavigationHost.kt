@@ -64,7 +64,10 @@ fun NavigationHost(
         }
 
         composable(Destinations.ClientAddScreen.route) {
-            AddClientScreen(padding)
+            AddClientScreen(
+                padding = padding,
+                changeTitle = changeTitle,
+            )
         }
     }
 }

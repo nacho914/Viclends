@@ -7,13 +7,14 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import victor.paez.STORAGE_URL
 import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class FirestoreStorageReferenceModule {
+class StorageModule {
     @Provides
     @Singleton
     fun provideFirestoreStorageReference(): StorageReference =
-        Firebase.storage("gs://viclends-a84ca.appspot.com").reference.child("client_images")
+        Firebase.storage(STORAGE_URL).reference
 }
