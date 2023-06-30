@@ -49,6 +49,7 @@ dependencies {
     implementation(project("::data:payment"))
     implementation(project("::data:image"))
 
+
     //Android Hilt
     implementation "com.google.dagger:hilt-android:2.44"
     kapt "com.google.dagger:hilt-compiler:2.44"
