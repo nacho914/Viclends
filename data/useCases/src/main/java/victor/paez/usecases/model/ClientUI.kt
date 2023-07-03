@@ -9,6 +9,7 @@ data class ClientUI(
     val debt: Int = 0,
     val revenue: Int = 0,
     val birthday: Date? = null,
+    val imageUrl: String = "",
 ) {
     companion object {
         fun fromClientDtoToClientUI(clientDTO: ClientDTO):
@@ -19,6 +20,7 @@ data class ClientUI(
                 debt = clientDTO.debt ?: 0,
                 revenue = clientDTO.revenue ?: 0,
                 birthday = clientDTO.birthday,
+                imageUrl = clientDTO.imageUrl,
             )
     }
 }

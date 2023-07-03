@@ -19,10 +19,7 @@ class DashboardViewModel @Inject constructor(
     var isLoading = mutableStateOf(true)
         private set
 
-    init {
-        getDashboardData()
-    }
-    private fun getDashboardData() {
+    fun getDashboardData() {
         isLoading.value = true
         viewModelScope.launch {
             getResumeDataUseCase.invoke().collect {

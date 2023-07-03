@@ -85,4 +85,32 @@ class ClientDataSourceImp @Inject constructor(
 
         emit(bResponse)
     }
+
+    override fun deleteClient(clientId: String): Flow<Boolean> = flow {
+        val bResponse = suspendCoroutine { response ->
+
+            firestore.runTransaction { transaction ->
+                val mainDocRef = firestore.collection(MAIN_PATH)
+
+                // Add client to the resume
+                val docResume = mainDocRef.document(RESUME_INFORMATION_PATH)
+                val snapshot = transaction.get(docResume)
+                val deleteClient = snapshot.getLong(PEOPLE)!! - 1
+                transaction.update(docResume, PEOPLE, deleteClient)
+
+                // Add client to collection Firebase
+                val docRef = mainDocRef.document(MASTER_ID).collection(CLIENT_PATH).document(clientId)
+                transaction.delete(docRef)
+
+                null
+            }.addOnSuccessListener {
+                response.resume(true)
+            }.addOnFailureListener {
+                response.resume(false)
+                Log.d("Nacho", "Error Message :${it.message}")
+            }
+        }
+
+        emit(bResponse)
+    }
 }

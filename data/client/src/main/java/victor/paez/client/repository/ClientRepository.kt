@@ -8,4 +8,5 @@ interface ClientRepository {
     suspend fun getClientList(): Flow<List<ClientDTO>>
     suspend fun getClient(clientId: String): Flow<ClientDTO>
     suspend fun addClient(client: ClientAddDTO): Flow<Boolean>
+    suspend fun deleteClient(clientId: String): Flow<Boolean>
 }

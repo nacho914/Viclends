@@ -40,13 +40,15 @@ fun NavigationHost(
                 },
             )
         }
-
         composable(Destinations.ClientDetailScreen.route) { backStackEntry ->
             ClientDetailScreen(
+                padding = padding,
+                clientId = backStackEntry.arguments?.getString(CLIENT_ID).orEmpty(),
+                navReturn = { navController.popBackStack() },
                 navAccountList = { clientId ->
                     navController.navigate(Destinations.AccountListScreen.createRoute(clientId))
                 },
-                clientId = backStackEntry.arguments?.getString(CLIENT_ID).orEmpty(),
+
             )
         }
 

@@ -24,4 +24,8 @@ class ClientRepositoryImp
     override suspend fun addClient(client: ClientAddDTO): Flow<Boolean> = withContext(dispatcher) {
         firestoreDataSource.addClient(client)
     }
+
+    override suspend fun deleteClient(clientId: String): Flow<Boolean> = withContext(dispatcher) {
+        firestoreDataSource.deleteClient(clientId)
+    }
 }

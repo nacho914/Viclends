@@ -3,6 +3,7 @@ package victor.paez.client.model
 import com.google.firebase.firestore.DocumentSnapshot
 import victor.paez.client.BIRTHDAY_FIREBASE
 import victor.paez.client.DEBT_FIREBASE
+import victor.paez.client.IMAGE_URL
 import victor.paez.client.NAME_FIREBASE
 import victor.paez.client.PHONE_FIREBASE
 import victor.paez.client.REVENUE_FIREBASE
@@ -17,6 +18,7 @@ data class ClientDTO(
     val revenue: Int? = 0,
     val birthday: Date? = null,
     val startDate: Date? = null,
+    val imageUrl: String = "",
 ) {
     companion object {
         fun getClientDTO(
@@ -30,6 +32,7 @@ data class ClientDTO(
                 revenue = document.getLong(REVENUE_FIREBASE)?.toInt() ?: 0,
                 birthday = document.getDate(BIRTHDAY_FIREBASE),
                 startDate = document.getDate(START_DATE),
+                imageUrl = document.getString(IMAGE_URL).orEmpty(),
             )
     }
 }

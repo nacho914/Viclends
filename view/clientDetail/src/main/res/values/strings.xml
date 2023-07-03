@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="name_detail">Name :</string>
+    <string name="accounts_list">Listado de cuentas</string>
+    <string name="delete_client">Delete client</string>
+</resources>

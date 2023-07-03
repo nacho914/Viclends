@@ -19,11 +19,7 @@ class ClientListViewModel @Inject constructor(
 
     var isLoading = mutableStateOf(true)
         private set
-
-    init {
-        getClientList()
-    }
-    private fun getClientList() {
+    fun getClientList() {
         isLoading.value = true
         viewModelScope.launch {
             getClientListUseCase.invoke().collect {
