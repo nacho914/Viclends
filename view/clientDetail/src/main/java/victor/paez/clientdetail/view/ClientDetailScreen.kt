@@ -23,6 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import victor.paez.clientdetail.viewmodel.ClientDetailViewModel
+import victor.paez.ui.FABAdd
 import victor.paez.ui.LoadingWheel
 import victor.paez.ui.R
 
@@ -32,6 +33,7 @@ fun ClientDetailScreen(
     clientId: String,
     navAccountList: (clientId: String) -> Unit,
     navReturn: () -> Unit,
+    navAddAccount: (clientId: String) -> Unit,
     clientDetailViewModel: ClientDetailViewModel = hiltViewModel(),
 ) {
     val client = clientDetailViewModel.clientDetail.value
@@ -100,6 +102,10 @@ fun ClientDetailScreen(
                 Text(text = stringResource(id = victor.paez.clientdetail.R.string.delete_client))
             }
         }
+    }
+
+    FABAdd(padding = padding) {
+        navAddAccount(clientId)
     }
 
     if (isLoading) {

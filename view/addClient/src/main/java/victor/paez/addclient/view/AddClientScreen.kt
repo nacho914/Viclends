@@ -71,15 +71,15 @@ fun AddClientScreen(
 
                 TextField(
                     value = addClientViewModel.nameClient.value,
-                    onValueChange = {
-                        addClientViewModel.nameClient.value = it
-                        addClientViewModel.checkNameFormat(it)
-                    },
                     label = { Text(text = stringResource(id = R.string.name_text)) },
                     modifier = Modifier.padding(16.dp),
                     maxLines = 1,
                     keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Text),
                     isError = addClientViewModel.isWrongNameFormat.value,
+                    onValueChange = {
+                        addClientViewModel.nameClient.value = it
+                        addClientViewModel.checkNameFormat(it)
+                    },
                 )
 
                 TextField(

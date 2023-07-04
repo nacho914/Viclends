@@ -24,6 +24,7 @@
             <option value="$PROJECT_DIR$/data/useCases" />
             <option value="$PROJECT_DIR$/view" />
             <option value="$PROJECT_DIR$/view/accountList" />
+            <option value="$PROJECT_DIR$/view/addAccount" />
             <option value="$PROJECT_DIR$/view/addClient" />
             <option value="$PROJECT_DIR$/view/clientDetail" />
             <option value="$PROJECT_DIR$/view/clientsList" />
