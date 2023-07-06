@@ -17,10 +17,14 @@ import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import victor.paez.addaccount.R
 import victor.paez.addaccount.viewmodel.AddAccountViewModel
+import victor.paez.ui.BlockingLoadingWheel
+import victor.paez.ui.MainAlertDialog
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -30,8 +34,22 @@ fun AddAccountScreen(
     changeTitle: (String) -> Unit,
     addAccountViewModel: AddAccountViewModel = hiltViewModel(),
 ) {
-    changeTitle("Agregar cuenta")
+    changeTitle(stringResource(id = R.string.add_account_screen_name))
     val datePickerState = rememberDatePickerState(initialDisplayMode = DisplayMode.Input)
+
+    addAccountViewModel.account.value.date = datePickerState.selectedDateMillis ?: 0L
+    addAccountViewModel.account.value.idClient = clientId
+    val isLoading = addAccountViewModel.isLoading.value
+    val isAccountAdd = addAccountViewModel.isAccountAdd.value
+
+    MainAlertDialog(
+        showDialog = isAccountAdd,
+        title = "Cuenta Agregada",
+        textBody = "La cuenta ha sido agregada con exito",
+        confirmText = "Ok",
+    ) {
+        addAccountViewModel.addConfirm()
+    }
 
     LazyColumn(
         modifier = Modifier
@@ -48,7 +66,7 @@ fun AddAccountScreen(
             ) {
                 TextField(
                     value = addAccountViewModel.nameAccount.value,
-                    label = { Text(text = "Nombre de cuenta") },
+                    label = { Text(text = stringResource(id = R.string.name_account_holder)) },
                     modifier = Modifier.padding(16.dp),
                     maxLines = 1,
                     keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Text),
@@ -58,7 +76,7 @@ fun AddAccountScreen(
                 )
 
                 Text(
-                    text = "Fecha creacion",
+                    text = stringResource(id = R.string.creation_date_label),
                     modifier = Modifier
                         .fillMaxWidth()
                         .align(Alignment.Start)
@@ -75,31 +93,37 @@ fun AddAccountScreen(
                 TextField(
                     value = addAccountViewModel.debtAccount.value,
                     onValueChange = { addAccountViewModel.debtAccount.value = it },
-                    label = { Text(text = "Deuda") },
+                    label = { Text(text = stringResource(id = R.string.debt_text_holder)) },
                     modifier = Modifier.padding(16.dp),
                     maxLines = 1,
                     keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
                     placeholder = { Text("0") },
+                    prefix = { Text(text = "$") },
                 )
 
                 TextField(
                     value = addAccountViewModel.revenueAccount.value,
                     onValueChange = { addAccountViewModel.revenueAccount.value = it },
-                    label = { Text(text = "Ganancia") },
+                    label = { Text(text = stringResource(id = R.string.revenue_text_holder)) },
                     modifier = Modifier.padding(16.dp),
                     maxLines = 1,
                     keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
                     placeholder = { Text("0") },
+                    prefix = { Text(text = "$") },
                 )
 
                 Button(
-                    onClick = { },
-                    enabled = true,
+                    onClick = { addAccountViewModel.addAccount() },
+                    enabled = addAccountViewModel.isEnable(),
                     modifier = Modifier.padding(16.dp),
                 ) {
-                    Text(text = "Agregar cuenta")
+                    Text(text = stringResource(id = R.string.add_account_button))
                 }
             }
         }
+    }
+
+    if (isLoading) {
+        BlockingLoadingWheel()
     }
 }

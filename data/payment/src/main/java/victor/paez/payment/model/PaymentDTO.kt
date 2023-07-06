@@ -1,12 +1,12 @@
 package victor.paez.payment.model
 
 import com.google.firebase.firestore.DocumentSnapshot
-import victor.paez.payment.DATE_FIREBASE
-import victor.paez.payment.DEBT_FIREBASE
-import victor.paez.payment.ID_ACCOUNT_FIREBASE
-import victor.paez.payment.ID_CLIENT_FIREBASE
-import victor.paez.payment.REVENUE_FIREBASE
-import victor.paez.payment.TOTAL_FIREBASE
+import victor.paez.util.DATE_FIREBASE
+import victor.paez.util.DEBT_FIREBASE
+import victor.paez.util.ID_ACCOUNT_FIREBASE
+import victor.paez.util.ID_CLIENT_FIREBASE
+import victor.paez.util.REVENUE_FIREBASE
+import victor.paez.util.TOTAL_FIREBASE
 import java.util.Date
 
 data class PaymentDTO(

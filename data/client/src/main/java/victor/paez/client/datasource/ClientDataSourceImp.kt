@@ -4,13 +4,12 @@ import android.util.Log
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import victor.paez.client.CLIENT_PATH
-import victor.paez.client.MAIN_PATH
-import victor.paez.client.MASTER_ID
-import victor.paez.client.PEOPLE
-import victor.paez.client.RESUME_INFORMATION_PATH
 import victor.paez.client.model.ClientAddDTO
 import victor.paez.client.model.ClientDTO
+import victor.paez.util.CLIENT_PATH
+import victor.paez.util.MAIN_PATH
+import victor.paez.util.MASTER_ID
+import victor.paez.util.PEOPLE
 import javax.inject.Inject
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
@@ -65,7 +64,7 @@ class ClientDataSourceImp @Inject constructor(
                 val mainDocRef = firestore.collection(MAIN_PATH)
 
                 // Add client to the resume
-                val docResume = mainDocRef.document(RESUME_INFORMATION_PATH)
+                val docResume = mainDocRef.document(MASTER_ID)
                 val snapshot = transaction.get(docResume)
                 val newClientAdd = snapshot.getLong(PEOPLE)!! + 1
                 transaction.update(docResume, PEOPLE, newClientAdd)
@@ -93,7 +92,7 @@ class ClientDataSourceImp @Inject constructor(
                 val mainDocRef = firestore.collection(MAIN_PATH)
 
                 // Add client to the resume
-                val docResume = mainDocRef.document(RESUME_INFORMATION_PATH)
+                val docResume = mainDocRef.document(MASTER_ID)
                 val snapshot = transaction.get(docResume)
                 val deleteClient = snapshot.getLong(PEOPLE)!! - 1
                 transaction.update(docResume, PEOPLE, deleteClient)

@@ -57,6 +57,7 @@ fun NavigationHost(
 
         composable(Destinations.AccountListScreen.route) { backStackEntry ->
             AccountListScreen(
+                padding = padding,
                 clientId = backStackEntry.arguments?.getString(CLIENT_ID).orEmpty(),
                 navPaymentList = { accountId ->
                     navController.navigate(Destinations.PaymentListScreen.createRoute(accountId))

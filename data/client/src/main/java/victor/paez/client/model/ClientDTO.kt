@@ -1,13 +1,13 @@
 package victor.paez.client.model
 
 import com.google.firebase.firestore.DocumentSnapshot
-import victor.paez.client.BIRTHDAY_FIREBASE
-import victor.paez.client.DEBT_FIREBASE
-import victor.paez.client.IMAGE_URL
-import victor.paez.client.NAME_FIREBASE
-import victor.paez.client.PHONE_FIREBASE
-import victor.paez.client.REVENUE_FIREBASE
-import victor.paez.client.START_DATE
+import victor.paez.util.BIRTHDAY_FIREBASE
+import victor.paez.util.DEBT_FIREBASE
+import victor.paez.util.IMAGE_URL
+import victor.paez.util.NAME_CLIENT_FIREBASE
+import victor.paez.util.PHONE_FIREBASE
+import victor.paez.util.REVENUE_FIREBASE
+import victor.paez.util.START_DATE
 import java.util.Date
 
 data class ClientDTO(
@@ -26,7 +26,7 @@ data class ClientDTO(
         ): ClientDTO =
             ClientDTO(
                 id = document.id,
-                name = document.getString(NAME_FIREBASE).orEmpty(),
+                name = document.getString(NAME_CLIENT_FIREBASE).orEmpty(),
                 phone = document.getString(PHONE_FIREBASE).orEmpty(),
                 debt = document.getLong(DEBT_FIREBASE)?.toInt() ?: 0,
                 revenue = document.getLong(REVENUE_FIREBASE)?.toInt() ?: 0,

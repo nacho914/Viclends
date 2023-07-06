@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="add_account_screen_name">Agregar cuenta</string>
+    <string name="name_account_holder">Nombre de cuenta</string>
+    <string name="creation_date_label">Fecha creacion</string>
+    <string name="debt_text_holder">Deuda</string>
+    <string name="revenue_text_holder">Ganancia</string>
+    <string name="add_account_button">Agregar cuenta</string>
+</resources>

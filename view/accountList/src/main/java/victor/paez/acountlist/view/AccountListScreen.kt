@@ -1,6 +1,7 @@
 package victor.paez.acountlist.view
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -24,6 +25,7 @@ import victor.paez.ui.LoadingWheel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AccountListScreen(
+    padding: PaddingValues,
     clientId: String,
     navPaymentList: (accountId: String) -> Unit,
     accountListViewModel: AccountListViewModel = hiltViewModel(),
@@ -39,7 +41,7 @@ fun AccountListScreen(
         LoadingWheel()
     }
 
-    LazyColumn(modifier = Modifier.fillMaxSize()) {
+    LazyColumn(modifier = Modifier.fillMaxSize().padding(padding)) {
         items(accountList) { account ->
             Surface(
                 onClick = { navPaymentList(account.id.orEmpty()) },

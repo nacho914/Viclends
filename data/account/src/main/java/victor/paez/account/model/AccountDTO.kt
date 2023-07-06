@@ -1,14 +1,14 @@
 package victor.paez.account.model
 
 import com.google.firebase.firestore.DocumentSnapshot
-import victor.paez.account.ACTIVE_FIREBASE
-import victor.paez.account.DATE_FIREBASE
-import victor.paez.account.DEBT_FIREBASE
-import victor.paez.account.ID_CLIENT_FIREBASE
-import victor.paez.account.NAME_FIREBASE
-import victor.paez.account.ORIGINAL_DEBT_FIREBASE
-import victor.paez.account.ORIGINAL_REVENUE_FIREBASE
-import victor.paez.account.REVENUE_FIREBASE
+import victor.paez.util.ACTIVE_FIREBASE
+import victor.paez.util.DATE_FIREBASE
+import victor.paez.util.DEBT_FIREBASE
+import victor.paez.util.ID_CLIENT_FIREBASE
+import victor.paez.util.NAME_FIREBASE
+import victor.paez.util.ORIGINAL_DEBT_FIREBASE
+import victor.paez.util.ORIGINAL_REVENUE_FIREBASE
+import victor.paez.util.REVENUE_FIREBASE
 import java.util.Date
 
 data class AccountDTO(

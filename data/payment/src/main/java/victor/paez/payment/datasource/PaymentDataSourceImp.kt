@@ -4,11 +4,11 @@ import android.util.Log
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import victor.paez.payment.ID_ACCOUNT_FIREBASE
-import victor.paez.payment.MAIN_PATH
-import victor.paez.payment.MASTER_ID
-import victor.paez.payment.PAYMENT_PATH
 import victor.paez.payment.model.PaymentDTO
+import victor.paez.util.ID_ACCOUNT_FIREBASE
+import victor.paez.util.MAIN_PATH
+import victor.paez.util.MASTER_ID
+import victor.paez.util.PAYMENT_PATH
 import javax.inject.Inject
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
