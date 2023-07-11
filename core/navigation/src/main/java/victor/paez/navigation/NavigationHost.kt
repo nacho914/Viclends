@@ -8,6 +8,7 @@ import androidx.navigation.compose.rememberNavController
 import victor.paez.acountlist.view.AccountListScreen
 import victor.paez.addaccount.view.AddAccountScreen
 import victor.paez.addclient.view.AddClientScreen
+import victor.paez.addpayment.view.AddPaymentScreen
 import victor.paez.clientList.view.ClientListScreen
 import victor.paez.clientdetail.view.ClientDetailScreen
 import victor.paez.dashboard.view.DashboardScreen
@@ -44,6 +45,7 @@ fun NavigationHost(
         composable(Destinations.ClientDetailScreen.route) { backStackEntry ->
             ClientDetailScreen(
                 padding = padding,
+                changeTitle = changeTitle,
                 clientId = backStackEntry.arguments?.getString(CLIENT_ID).orEmpty(),
                 navReturn = { navController.popBackStack() },
                 navAccountList = { clientId ->
@@ -58,15 +60,22 @@ fun NavigationHost(
         composable(Destinations.AccountListScreen.route) { backStackEntry ->
             AccountListScreen(
                 padding = padding,
+                changeTitle = changeTitle,
                 clientId = backStackEntry.arguments?.getString(CLIENT_ID).orEmpty(),
                 navPaymentList = { accountId ->
                     navController.navigate(Destinations.PaymentListScreen.createRoute(accountId))
+                },
+                navAddPayment = { accountId ->
+                    navController.navigate(Destinations.PaymentAddScreen.createRoute(accountId))
                 },
             )
         }
 
         composable(Destinations.PaymentListScreen.route) { backStackEntry ->
-            PaymentListScreen(backStackEntry.arguments?.getString(ACCOUNT_ID).orEmpty())
+            PaymentListScreen(
+                changeTitle = changeTitle,
+                accountId = backStackEntry.arguments?.getString(ACCOUNT_ID).orEmpty(),
+            )
         }
 
         composable(Destinations.ClientAddScreen.route) {
@@ -81,6 +90,16 @@ fun NavigationHost(
                 padding = padding,
                 clientId = backStackEntry.arguments?.getString(CLIENT_ID).orEmpty(),
                 changeTitle = changeTitle,
+            )
+        }
+
+        composable(
+            Destinations.PaymentAddScreen.route,
+        ) { backStackEntry ->
+            AddPaymentScreen(
+                padding = padding,
+                changeTitle = changeTitle,
+                accountId = backStackEntry.arguments?.getString(ACCOUNT_ID).orEmpty(),
             )
         }
     }

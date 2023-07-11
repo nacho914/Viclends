@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="detail_client_screen">Detalle del cliente</string>
     <string name="name_detail">Name :</string>
     <string name="accounts_list">Listado de cuentas</string>
     <string name="delete_client">Eliminar cliente</string>

@@ -5,11 +5,11 @@ plugins {
 
 android {
     namespace 'victor.paez.navigation'
-    compileSdk 33
+    compileSdk 34
 
     defaultConfig {
         minSdk 24
-        targetSdk 33
+        targetSdk 34
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -53,8 +53,9 @@ dependencies {
     implementation 'androidx.compose.ui:ui-tooling-preview'
     implementation 'androidx.compose.material3:material3'
 
-    //Navigation
-    implementation "androidx.navigation:navigation-compose:2.5.3"
+    // Navigation
+    implementation "androidx.navigation:navigation-compose:2.6.0"
+
 
     // Local modules
     implementation(project(":view:dashboard"))
@@ -64,6 +65,7 @@ dependencies {
     implementation(project(":view:paymentList"))
     implementation(project(":view:addClient"))
     implementation(project(":view:addAccount"))
+    implementation(project(":view:addPayment"))
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'

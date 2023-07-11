@@ -16,20 +16,24 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import victor.paez.paymentlist.R
 import victor.paez.paymentlist.viewmodel.PaymentListViewModel
 import victor.paez.ui.LoadingWheel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PaymentListScreen(
+    changeTitle: (String) -> Unit,
     accountId: String,
     paymentListViewModel: PaymentListViewModel = hiltViewModel(),
 ) {
     val paymentList by paymentListViewModel.paymentList
     val isLoading: Boolean by paymentListViewModel.isLoading
 
+    changeTitle(stringResource(id = R.string.payments_screen))
     LaunchedEffect(accountId) {
         paymentListViewModel.getPaymentList(accountId)
     }

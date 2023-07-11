@@ -30,6 +30,7 @@ import victor.paez.ui.R
 @Composable
 fun ClientDetailScreen(
     padding: PaddingValues,
+    changeTitle: (String) -> Unit,
     clientId: String,
     navAccountList: (clientId: String) -> Unit,
     navReturn: () -> Unit,
@@ -38,6 +39,8 @@ fun ClientDetailScreen(
 ) {
     val client = clientDetailViewModel.clientDetail.value
     val isLoading: Boolean by clientDetailViewModel.isLoading
+
+    changeTitle(stringResource(id = victor.paez.clientdetail.R.string.detail_client_screen))
 
     LaunchedEffect(clientId) {
         clientDetailViewModel.getClientDetail(clientId)
