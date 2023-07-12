@@ -19,4 +19,8 @@ class AccountRepositoryImp @Inject constructor(
     override suspend fun addAccount(addAccountDTO: AddAccountDTO): Flow<Boolean> = withContext(dispatcher) {
         firestoreDataSource.addAccount(addAccountDTO)
     }
+
+    override suspend fun getAccountInformation(accountId: String): Flow<AccountDTO> = withContext(dispatcher) {
+        firestoreDataSource.getAccountInformation(accountId)
+    }
 }

@@ -7,6 +7,7 @@ import kotlinx.coroutines.flow.flow
 import victor.paez.account.model.AccountDTO
 import victor.paez.account.model.AddAccountDTO
 import victor.paez.util.ACCOUNT_PATH
+import victor.paez.util.CLIENT_PATH
 import victor.paez.util.DEBT_FIREBASE
 import victor.paez.util.ID_CLIENT_FIREBASE
 import victor.paez.util.MAIN_PATH
@@ -48,13 +49,24 @@ class AccountDataSourceImp @Inject constructor(
                 firestore.runTransaction { transaction ->
                     val mainDocRef = firestore.collection(MAIN_PATH)
 
-                    // Update debt and revenue from resume information
+                    // Get master and client
                     val docResume = mainDocRef.document(MASTER_ID)
                     val snapshot = transaction.get(docResume)
+
+                    val docClient = mainDocRef.document(MASTER_ID).collection(CLIENT_PATH).document(account.idClient)
+                    val clientSnapshot = transaction.get(docClient)
+
+                    // Update debt and revenue from resume information
                     val updatedDebt = snapshot.getLong(DEBT_FIREBASE)!! + account.debt
                     val updatedRevenue = snapshot.getLong(REVENUE_FIREBASE)!! + account.revenue
                     transaction.update(docResume, DEBT_FIREBASE, updatedDebt)
                     transaction.update(docResume, REVENUE_FIREBASE, updatedRevenue)
+
+                    // Update debt and revenue from client information
+                    val updatedClientDebt = clientSnapshot.getLong(DEBT_FIREBASE)!! + account.debt
+                    val updatedClientRevenue = clientSnapshot.getLong(REVENUE_FIREBASE)!! + account.revenue
+                    transaction.update(docClient, DEBT_FIREBASE, updatedClientDebt)
+                    transaction.update(docClient, REVENUE_FIREBASE, updatedClientRevenue)
 
                     // Add client to collection Firebase
                     val docRef = mainDocRef
@@ -75,4 +87,21 @@ class AccountDataSourceImp @Inject constructor(
 
             emit(bResponse)
         }
+
+    override fun getAccountInformation(accountId: String): Flow<AccountDTO> = flow {
+        val account = suspendCoroutine { finalAccount ->
+            firestore
+                .collection(MAIN_PATH)
+                .document(MASTER_ID)
+                .collection(ACCOUNT_PATH)
+                .document(accountId)
+                .get()
+                .addOnSuccessListener { data ->
+                    finalAccount.resume(AccountDTO.getAccountDTO(data))
+                }.addOnFailureListener {
+                    Log.d("Nacho", "Something fail")
+                }
+        }
+        emit(account)
+    }
 }

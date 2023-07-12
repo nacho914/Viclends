@@ -13,13 +13,17 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import victor.paez.addpayment.R
+import victor.paez.addpayment.viewModel.AddPaymentViewModel
+import victor.paez.ui.BlockingLoadingWheel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -27,9 +31,16 @@ fun AddPaymentScreen(
     padding: PaddingValues,
     accountId: String,
     changeTitle: (String) -> Unit,
+    addPaymentViewModel: AddPaymentViewModel = hiltViewModel(),
 ) {
     changeTitle(stringResource(id = R.string.add_payment_screen_name))
     val datePickerState = rememberDatePickerState(initialDisplayMode = DisplayMode.Input)
+    addPaymentViewModel.paymentAddUI.value.date = datePickerState.selectedDateMillis ?: 0L
+    val isLoading: Boolean by addPaymentViewModel.isLoading
+
+    LaunchedEffect(accountId) {
+        addPaymentViewModel.getAccountInformation(accountId)
+    }
 
     Column(
         modifier = Modifier.padding(padding).fillMaxSize(),
@@ -41,13 +52,13 @@ fun AddPaymentScreen(
         )
 
         Text(
-            text = "$500",
+            text = "$" + addPaymentViewModel.getTotalDebt() + ".00",
             modifier = Modifier.padding(8.dp),
         )
 
         TextField(
-            value = "0",
-            onValueChange = {},
+            value = addPaymentViewModel.paymentText.value,
+            onValueChange = { addPaymentViewModel.paymentText.value = it },
             label = { Text(text = "Abono") },
             modifier = Modifier.padding(16.dp),
             maxLines = 1,
@@ -65,11 +76,15 @@ fun AddPaymentScreen(
         )
 
         Button(
-            onClick = { },
-            enabled = true,
+            onClick = { addPaymentViewModel.addAccount() },
+            enabled = addPaymentViewModel.isEnable(),
             modifier = Modifier.padding(16.dp),
         ) {
             Text(text = "Agregar abono")
         }
+    }
+
+    if (isLoading) {
+        BlockingLoadingWheel()
     }
 }

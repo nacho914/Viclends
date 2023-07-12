@@ -35,3 +35,5 @@ const val IMAGE_URL = "imgUrl"
 // Payments values
 const val ID_ACCOUNT_FIREBASE = "idAccount"
 const val TOTAL_FIREBASE = "totalPayment"
+const val PAYMENT_DEBT = "debtPayment"
+const val REVENUE_PAYMENT = "revenuePayment"

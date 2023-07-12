@@ -7,4 +7,6 @@ import victor.paez.account.model.AddAccountDTO
 interface AccountDataSource {
     fun getAccountsList(clientId: String): Flow<List<AccountDTO>>
     fun addAccount(account: AddAccountDTO): Flow<Boolean>
+
+    fun getAccountInformation(accountId: String): Flow<AccountDTO>
 }
