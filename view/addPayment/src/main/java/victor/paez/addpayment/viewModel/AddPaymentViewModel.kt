@@ -54,9 +54,18 @@ class AddPaymentViewModel @Inject constructor(
         }
     }
 
+    fun onlyNumbers(payment: String): Boolean = payment.matches(Regex("^\\d+\$"))
+
     fun isEnable() = paymentText.value.isNotEmpty() &&
-        paymentAddUI.value.date != 0L
+        paymentAddUI.value.date != 0L &&
+        paymentText.value.toInt() <= getTotalDebt()
 
     fun getTotalDebt() = accountInformation.value.debt +
         accountInformation.value.revenue
+
+    fun confirmPayment() {
+        getAccountInformation(accountInformation.value.idAccount.toString())
+        paymentText.value = ""
+        isPaymentAdd.value = false
+    }
 }

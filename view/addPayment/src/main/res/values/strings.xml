@@ -1,4 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="add_payment_screen_name">Agregar abono</string>
+
+    <string name="alert_title_confirmation">Pago agregado</string>
+    <string name="alert_text_confirmation">El deposito ha sido realizado</string>
+    <string name="alert_button_confirmation">OK</string>
+
+    <string name="peding_amount_label">Cantidad Pendiente:</string>
+
+    <string name="payment_text">Abono</string>
+
+    <string name="add_payment_button">Agregar abono</string>
 </resources>

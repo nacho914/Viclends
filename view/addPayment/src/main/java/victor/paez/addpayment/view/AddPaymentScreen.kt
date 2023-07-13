@@ -24,6 +24,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import victor.paez.addpayment.R
 import victor.paez.addpayment.viewModel.AddPaymentViewModel
 import victor.paez.ui.BlockingLoadingWheel
+import victor.paez.ui.MainAlertDialog
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -37,9 +38,19 @@ fun AddPaymentScreen(
     val datePickerState = rememberDatePickerState(initialDisplayMode = DisplayMode.Input)
     addPaymentViewModel.paymentAddUI.value.date = datePickerState.selectedDateMillis ?: 0L
     val isLoading: Boolean by addPaymentViewModel.isLoading
+    val isPaymentAdd: Boolean by addPaymentViewModel.isPaymentAdd
 
     LaunchedEffect(accountId) {
         addPaymentViewModel.getAccountInformation(accountId)
+    }
+
+    MainAlertDialog(
+        showDialog = isPaymentAdd,
+        title = stringResource(id = R.string.alert_title_confirmation),
+        textBody = stringResource(id = R.string.alert_text_confirmation),
+        confirmText = stringResource(id = R.string.alert_button_confirmation),
+    ) {
+        addPaymentViewModel.confirmPayment()
     }
 
     Column(
@@ -47,7 +58,7 @@ fun AddPaymentScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Text(
-            text = "Cantidad Pendiente:",
+            text = stringResource(id = R.string.peding_amount_label),
             modifier = Modifier.padding(16.dp),
         )
 
@@ -58,8 +69,12 @@ fun AddPaymentScreen(
 
         TextField(
             value = addPaymentViewModel.paymentText.value,
-            onValueChange = { addPaymentViewModel.paymentText.value = it },
-            label = { Text(text = "Abono") },
+            onValueChange = {
+                if (addPaymentViewModel.onlyNumbers(it)) {
+                    addPaymentViewModel.paymentText.value = it
+                }
+            },
+            label = { Text(text = stringResource(id = R.string.payment_text)) },
             modifier = Modifier.padding(16.dp),
             maxLines = 1,
             keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
@@ -80,7 +95,7 @@ fun AddPaymentScreen(
             enabled = addPaymentViewModel.isEnable(),
             modifier = Modifier.padding(16.dp),
         ) {
-            Text(text = "Agregar abono")
+            Text(text = stringResource(id = R.string.add_payment_button))
         }
     }
 
