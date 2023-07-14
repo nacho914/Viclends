@@ -19,8 +19,7 @@ class AddPaymentViewModel @Inject constructor(
     var paymentAddUI = mutableStateOf(PaymentAddUI())
         private set
 
-    var accountInformation = mutableStateOf(AccountUI())
-        private set
+    private var accountInformation = mutableStateOf(AccountUI())
 
     var paymentText = mutableStateOf("")
         private set
@@ -61,7 +60,7 @@ class AddPaymentViewModel @Inject constructor(
         paymentText.value.toInt() <= getTotalDebt()
 
     fun getTotalDebt() = accountInformation.value.debt +
-        accountInformation.value.revenue
+        accountInformation.value.revenue + accountInformation.value.delay
 
     fun confirmPayment() {
         getAccountInformation(accountInformation.value.idAccount.toString())

@@ -10,6 +10,7 @@ const val PAYMENT_PATH = "payments"
 // Values that repeat a lot
 const val DEBT_FIREBASE = "debt"
 const val REVENUE_FIREBASE = "revenue"
+const val DELAY_FIREBASE = "delay"
 const val ID_CLIENT_FIREBASE = "idClient"
 const val DATE_FIREBASE = "date"
 
@@ -24,6 +25,7 @@ const val NAME_FIREBASE = "name"
 const val ACTIVE_FIREBASE = "active"
 const val ORIGINAL_DEBT_FIREBASE = "originalDebt"
 const val ORIGINAL_REVENUE_FIREBASE = "originalRevenue"
+const val ORIGINAL_DELAY_FIREBASE = "originalDelay"
 
 // Client values
 const val NAME_CLIENT_FIREBASE = "name"

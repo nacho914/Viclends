@@ -9,6 +9,7 @@ import victor.paez.payment.model.PaymentDTO
 import victor.paez.util.ACCOUNT_PATH
 import victor.paez.util.CLIENT_PATH
 import victor.paez.util.DEBT_FIREBASE
+import victor.paez.util.DELAY_FIREBASE
 import victor.paez.util.ID_ACCOUNT_FIREBASE
 import victor.paez.util.MAIN_PATH
 import victor.paez.util.MASTER_ID
@@ -62,20 +63,26 @@ class PaymentDataSourceImp @Inject constructor(
                     // Update debt and revenue from resume information
                     val updatedDebt = snapshot.getLong(DEBT_FIREBASE)!! - addPaymentDTO.debtPayment
                     val updatedRevenue = snapshot.getLong(REVENUE_FIREBASE)!! - addPaymentDTO.revenuePayment
+                    val updatedDelay = snapshot.getLong(DELAY_FIREBASE)!! - addPaymentDTO.delayPayment
                     transaction.update(docResume, DEBT_FIREBASE, updatedDebt)
                     transaction.update(docResume, REVENUE_FIREBASE, updatedRevenue)
+                    transaction.update(docResume, DELAY_FIREBASE, updatedDelay)
 
-                    // Update debt and revenue from client information
+                    // Update debt,revenue and delays from client information
                     val updatedClientDebt = clientSnapshot.getLong(DEBT_FIREBASE)!! - addPaymentDTO.debtPayment
                     val updatedClientRevenue = clientSnapshot.getLong(REVENUE_FIREBASE)!! - addPaymentDTO.revenuePayment
+                    val updatedClientDelay = clientSnapshot.getLong(DELAY_FIREBASE)!! - addPaymentDTO.delayPayment
                     transaction.update(docClient, DEBT_FIREBASE, updatedClientDebt)
                     transaction.update(docClient, REVENUE_FIREBASE, updatedClientRevenue)
+                    transaction.update(docClient, DELAY_FIREBASE, updatedClientDelay)
 
-                    // Update debt and revenue from client information
+                    // Update debt,revenue and delays from account information
                     val updatedAccountDebt = accountSnapshot.getLong(DEBT_FIREBASE)!! - addPaymentDTO.debtPayment
                     val updatedAccountRevenue = accountSnapshot.getLong(REVENUE_FIREBASE)!! - addPaymentDTO.revenuePayment
+                    val updatedAccountDelay = accountSnapshot.getLong(DELAY_FIREBASE)!! - addPaymentDTO.delayPayment
                     transaction.update(docAccount, DEBT_FIREBASE, updatedAccountDebt)
                     transaction.update(docAccount, REVENUE_FIREBASE, updatedAccountRevenue)
+                    transaction.update(docAccount, DELAY_FIREBASE, updatedAccountDelay)
 
                     // Add payment to collection Firebase
                     val docRef = mainDocRef

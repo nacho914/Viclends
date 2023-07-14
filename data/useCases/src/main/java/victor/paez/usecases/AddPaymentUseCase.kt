@@ -21,14 +21,28 @@ class AddPaymentUseCase @Inject constructor(
         paymentDTO.date = getCalendarTime(payment.date)
         paymentDTO.idAccount = account.idAccount.toString()
 
-        // The payment is less than the debt so no payment to revenue
-        if (payment.payment <= account.debt) {
+        // TODO: Check the logic here, its wrong
+        if (payment.payment == (account.debt + account.revenue + account.delay)) {
+            paymentDTO.debtPayment = payment.payment - (account.revenue + account.delay)
+            paymentDTO.revenuePayment = payment.payment - (account.debt + account.delay)
+            paymentDTO.delayPayment = payment.payment - (account.debt + account.revenue)
+        } // The payment is less than the debt so no payment to revenue
+        else if (payment.payment <= account.debt) {
             paymentDTO.debtPayment = payment.payment
             paymentDTO.revenuePayment = 0
-        } else {
+            paymentDTO.delayPayment = 0
+        } // The payment is less than the revenue so no payment to delay
+        else if (payment.payment <= account.revenue) {
             paymentDTO.debtPayment = account.debt
-            paymentDTO.revenuePayment = payment.payment - account.debt
+            paymentDTO.revenuePayment = payment.payment
+            paymentDTO.delayPayment = 0
+        } // In this case for sure there is a payment to the delay
+        else {
+            paymentDTO.debtPayment = account.debt
+            paymentDTO.revenuePayment = account.revenue
+            paymentDTO.delayPayment = payment.payment - account.revenue
         }
+
         return paymentRepository.addPayment(paymentDTO)
     }
 }

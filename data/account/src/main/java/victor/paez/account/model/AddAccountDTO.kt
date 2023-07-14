@@ -11,4 +11,6 @@ data class AddAccountDTO(
     val originalDebt: Int = 0,
     val originalRevenue: Int = 0,
     val date: Date? = null,
+    val originalDelay: Int = 0,
+    val delay: Int = 0,
 )

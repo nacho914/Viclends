@@ -7,5 +7,6 @@ data class AddPaymentDTO(
     var totalPayment: Int = 0,
     var debtPayment: Int = 0,
     var revenuePayment: Int = 0,
+    var delayPayment: Int = 0,
     var date: Date? = null,
 )

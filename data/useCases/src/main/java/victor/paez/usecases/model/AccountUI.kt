@@ -13,6 +13,8 @@ data class AccountUI(
     val idClient: String? = "",
     val originalDebt: Int? = 0,
     val originalRevenue: Int? = 0,
+    val delay: Int = 0,
+    val originalDelay: Int = 0,
 ) {
     companion object {
         fun fromAccountDtoToAccountUI(accountDTO: AccountDTO): AccountUI =
@@ -24,6 +26,8 @@ data class AccountUI(
                 date = accountDTO.date,
                 active = accountDTO.active,
                 idClient = accountDTO.idClient,
+                originalDelay = accountDTO.originalDelay,
+                delay = accountDTO.delay,
             )
     }
 }
