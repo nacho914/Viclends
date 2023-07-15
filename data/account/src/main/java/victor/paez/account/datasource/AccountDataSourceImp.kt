@@ -12,6 +12,8 @@ import victor.paez.util.DEBT_FIREBASE
 import victor.paez.util.ID_CLIENT_FIREBASE
 import victor.paez.util.MAIN_PATH
 import victor.paez.util.MASTER_ID
+import victor.paez.util.ORIGINAL_DEBT_FIREBASE
+import victor.paez.util.ORIGINAL_REVENUE_FIREBASE
 import victor.paez.util.REVENUE_FIREBASE
 import javax.inject.Inject
 import kotlin.coroutines.resume
@@ -59,14 +61,22 @@ class AccountDataSourceImp @Inject constructor(
                     // Update debt and revenue from resume information
                     val updatedDebt = snapshot.getLong(DEBT_FIREBASE)!! + account.debt
                     val updatedRevenue = snapshot.getLong(REVENUE_FIREBASE)!! + account.revenue
+                    val updatedOriginalDebt = snapshot.getLong(ORIGINAL_DEBT_FIREBASE)!! + account.debt
+                    val updatedOriginalRevenue = snapshot.getLong(ORIGINAL_REVENUE_FIREBASE)!! + account.revenue
                     transaction.update(docResume, DEBT_FIREBASE, updatedDebt)
                     transaction.update(docResume, REVENUE_FIREBASE, updatedRevenue)
+                    transaction.update(docResume, ORIGINAL_DEBT_FIREBASE, updatedOriginalDebt)
+                    transaction.update(docResume, ORIGINAL_REVENUE_FIREBASE, updatedOriginalRevenue)
 
                     // Update debt and revenue from client information
                     val updatedClientDebt = clientSnapshot.getLong(DEBT_FIREBASE)!! + account.debt
                     val updatedClientRevenue = clientSnapshot.getLong(REVENUE_FIREBASE)!! + account.revenue
+                    val updatedClientOriginalDebt = clientSnapshot.getLong(ORIGINAL_DEBT_FIREBASE)!! + account.debt
+                    val updatedClientOriginalRevenue = clientSnapshot.getLong(ORIGINAL_REVENUE_FIREBASE)!! + account.revenue
                     transaction.update(docClient, DEBT_FIREBASE, updatedClientDebt)
                     transaction.update(docClient, REVENUE_FIREBASE, updatedClientRevenue)
+                    transaction.update(docClient, ORIGINAL_DEBT_FIREBASE, updatedClientOriginalDebt)
+                    transaction.update(docClient, ORIGINAL_REVENUE_FIREBASE, updatedClientOriginalRevenue)
 
                     // Add client to collection Firebase
                     val docRef = mainDocRef
