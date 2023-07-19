@@ -8,6 +8,7 @@ import androidx.navigation.compose.rememberNavController
 import victor.paez.acountlist.view.AccountListScreen
 import victor.paez.addaccount.view.AddAccountScreen
 import victor.paez.addclient.view.AddClientScreen
+import victor.paez.adddelay.view.AddDelayScreen
 import victor.paez.addpayment.view.AddPaymentScreen
 import victor.paez.clientList.view.ClientListScreen
 import victor.paez.clientdetail.view.ClientDetailScreen
@@ -68,6 +69,9 @@ fun NavigationHost(
                 navAddPayment = { accountId ->
                     navController.navigate(Destinations.PaymentAddScreen.createRoute(accountId))
                 },
+                navAddDelay = { accountId ->
+                    navController.navigate(Destinations.DelayAddScreen.createRoute(accountId))
+                },
             )
         }
 
@@ -97,6 +101,16 @@ fun NavigationHost(
             Destinations.PaymentAddScreen.route,
         ) { backStackEntry ->
             AddPaymentScreen(
+                padding = padding,
+                changeTitle = changeTitle,
+                accountId = backStackEntry.arguments?.getString(ACCOUNT_ID).orEmpty(),
+            )
+        }
+
+        composable(
+            Destinations.DelayAddScreen.route,
+        ) { backStackEntry ->
+            AddDelayScreen(
                 padding = padding,
                 changeTitle = changeTitle,
                 accountId = backStackEntry.arguments?.getString(ACCOUNT_ID).orEmpty(),

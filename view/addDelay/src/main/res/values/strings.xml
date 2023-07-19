@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="add_delay_screen_name">Agregar retardo</string>
+    <string name="peding_amount_label">Cantidad pendiente:</string>
+    <string name="add_delay_button">Agregar retardo</string>
+    <string name="add_delay_text">Retardo</string>
+    <string name="add_description_text">Descripcion</string>
+
+    <string name="add_delay_title_alert">Retardo agregado</string>
+    <string name="add_delay_body_alert">El retardo ha sido agregado con exito</string>
+    <string name="add_delay_confirm_alert">OK</string>
+
+</resources>

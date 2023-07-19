@@ -6,6 +6,7 @@ const val MASTER_ID = "vipp.914@gmail.com"
 const val ACCOUNT_PATH = "accounts"
 const val CLIENT_PATH = "clients"
 const val PAYMENT_PATH = "payments"
+const val DELAY_PATH = "delays"
 
 // Values that repeat a lot
 const val DEBT_FIREBASE = "debt"

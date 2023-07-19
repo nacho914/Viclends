@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -38,6 +39,7 @@ fun AccountListScreen(
     clientId: String,
     navPaymentList: (accountId: String) -> Unit,
     navAddPayment: (accountId: String) -> Unit,
+    navAddDelay: (accountId: String) -> Unit,
     accountListViewModel: AccountListViewModel = hiltViewModel(),
 ) {
     val accountList by accountListViewModel.accountList
@@ -63,22 +65,41 @@ fun AccountListScreen(
             ) {
                 Row(
                     modifier = Modifier
-                        .fillMaxSize()
+                        .fillMaxWidth()
                         .padding(16.dp),
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     Column(
                         verticalArrangement = Arrangement.Center,
-                        modifier = Modifier.fillMaxHeight(),
+                        modifier = Modifier.fillMaxHeight().weight(1f),
                     ) {
                         Text(
                             text = account.name.orEmpty(),
                             color = Color.Black,
                         )
                     }
+
+                    Column(
+                        modifier = Modifier
+                            .wrapContentWidth()
+                            .weight(0.2f),
+                    ) {
+                        IconButton(onClick = {
+                            navAddDelay(account.id.orEmpty())
+                        }) {
+                            Icon(
+                                painter = painterResource(id = victor.paez.ui.R.drawable.sharp_more_time_24),
+                                contentDescription = "Add",
+                                tint = Color.Black,
+                            )
+                        }
+                    }
                     Column(
                         horizontalAlignment = Alignment.End,
-                        modifier = Modifier.fillMaxWidth(),
+                        modifier = Modifier
+                            .wrapContentWidth()
+                            .weight(0.2f)
+                            .padding(start = 8.dp),
                     ) {
                         IconButton(onClick = {
                             navAddPayment(account.id.orEmpty())
