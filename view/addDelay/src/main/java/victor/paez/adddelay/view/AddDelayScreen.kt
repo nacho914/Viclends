@@ -67,7 +67,9 @@ fun AddDelayScreen(
         TextField(
             value = addDelayViewModel.delayText.value,
             onValueChange = {
-                addDelayViewModel.delayText.value = it
+                if (addDelayViewModel.onlyNumbers(it)) {
+                    addDelayViewModel.delayText.value = it
+                }
             },
             label = { Text(text = stringResource(id = R.string.add_delay_text)) },
             modifier = Modifier.padding(16.dp),
@@ -99,7 +101,7 @@ fun AddDelayScreen(
 
         Button(
             onClick = { addDelayViewModel.addDelay() },
-            enabled = true,
+            enabled = addDelayViewModel.isEnable(),
             modifier = Modifier.padding(16.dp),
         ) {
             Text(text = stringResource(id = R.string.add_delay_button))

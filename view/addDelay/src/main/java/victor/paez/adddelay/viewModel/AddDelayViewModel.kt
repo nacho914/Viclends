@@ -65,4 +65,10 @@ class AddDelayViewModel @Inject constructor(
 
     fun getTotalDebt() = accountInformation.value.debt +
         accountInformation.value.revenue + accountInformation.value.delay
+
+    fun onlyNumbers(payment: String): Boolean = payment.matches(Regex("^\\d+\$"))
+
+    fun isEnable() = delayText.value.isNotEmpty() &&
+        delay.value.date != 0L &&
+        descriptionText.value.isNotEmpty()
 }
