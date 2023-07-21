@@ -28,4 +28,10 @@ class DashboardViewModel @Inject constructor(
             }
         }
     }
+
+    fun getPresentTotal() =
+        dashboardData.value.debt + dashboardData.value.delay + dashboardData.value.revenue
+
+    fun getOriginalTotal() =
+        dashboardData.value.originalDebt + dashboardData.value.originalDelay + dashboardData.value.originalRevenue
 }

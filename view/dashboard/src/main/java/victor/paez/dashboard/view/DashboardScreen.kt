@@ -1,5 +1,6 @@
 package victor.paez.dashboard.view
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -7,12 +8,17 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -20,6 +26,7 @@ import victor.paez.dashboard.R
 import victor.paez.dashboard.viewmodel.DashboardViewModel
 import victor.paez.ui.LoadingWheel
 import victor.paez.usecases.model.DashboardData
+import victor.paez.util.LightPurple
 
 @Composable
 fun DashboardScreen(
@@ -43,24 +50,101 @@ fun DashboardScreen(
 
     Column(
         modifier = Modifier.padding(innerPadding).fillMaxSize(),
-        verticalArrangement = Arrangement.SpaceAround,
+        verticalArrangement = Arrangement.SpaceEvenly,
     ) {
-        Row(
-            modifier = Modifier.fillMaxWidth().padding(top = 16.dp),
-            horizontalArrangement = Arrangement.Center,
+        // Original Card
+        Card(
+            Modifier.fillMaxWidth().padding(horizontal = 16.dp),
+            shape = CardDefaults.elevatedShape,
+            colors = CardDefaults.cardColors(containerColor = LightPurple),
         ) {
-            Text(
-                text = "Total Prestamos nacho",
-            )
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center,
+            ) {
+                Text(
+                    text = "Prestamos historicos",
+                )
+            }
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center,
+            ) {
+                Column(
+                    Modifier.weight(0.3f).padding(16.dp),
+                    verticalArrangement = Arrangement.Center,
+                ) {
+                    Image(
+                        painter = painterResource(id = victor.paez.ui.R.drawable.baseline_history_24),
+                        contentDescription = "",
+                        modifier = Modifier.size(80.dp),
+                    )
+                }
+                Column(
+                    horizontalAlignment = Alignment.Start,
+                    modifier = Modifier.fillMaxWidth().padding(16.dp).weight(0.7f),
+                ) {
+                    Text(
+                        text = "Total prestado: " + dashboardViewModel.getOriginalTotal().toString(),
+                    )
+                    Text(
+                        text = "Deuda Original: " + dashboardData.originalDebt.toString(),
+                    )
+                    Text(
+                        text = "Ganancia Original: " + dashboardData.originalRevenue.toString(),
+                    )
+                    Text(
+                        text = "Retardo Original: " + dashboardData.originalDelay.toString(),
+                    )
+                }
+            }
         }
-
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.Center,
+        // Present Card
+        Card(
+            Modifier.fillMaxWidth().padding(horizontal = 16.dp),
+            shape = CardDefaults.elevatedShape,
+            colors = CardDefaults.cardColors(containerColor = LightPurple),
         ) {
-            Text(
-                text = dashboardData.totalLends.toString(),
-            )
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center,
+            ) {
+                Text(
+                    text = "Prestamos actuales",
+                )
+            }
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center,
+            ) {
+                Column(
+                    Modifier.weight(0.3f).padding(16.dp),
+                    verticalArrangement = Arrangement.Center,
+                ) {
+                    Image(
+                        painter = painterResource(id = victor.paez.ui.R.drawable.baseline_present_24),
+                        contentDescription = "",
+                        modifier = Modifier.size(80.dp),
+                    )
+                }
+                Column(
+                    horizontalAlignment = Alignment.Start,
+                    modifier = Modifier.fillMaxWidth().padding(16.dp).weight(0.7f),
+                ) {
+                    Text(
+                        text = "Total Actual: " + dashboardViewModel.getPresentTotal().toString(),
+                    )
+                    Text(
+                        text = "Deuda Actual: " + dashboardData.debt.toString(),
+                    )
+                    Text(
+                        text = "Ganancia Actual: " + dashboardData.revenue.toString(),
+                    )
+                    Text(
+                        text = "Retardo Actual: " + dashboardData.delay.toString(),
+                    )
+                }
+            }
         }
 
         Row(
@@ -81,41 +165,6 @@ fun DashboardScreen(
             )
         }
 
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.Center,
-        ) {
-            Text(
-                text = "Total a recibir quincenalmente",
-            )
-        }
-
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.Center,
-        ) {
-            Text(
-                text = dashboardData.totalEveryWeek.toString(),
-            )
-        }
-
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.Center,
-        ) {
-            Text(
-                text = "Interes obtenido",
-            )
-        }
-
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.Center,
-        ) {
-            Text(
-                text = dashboardData.revenue.toString(),
-            )
-        }
         Row(
             modifier = Modifier.fillMaxWidth().padding(bottom = 16.dp),
             horizontalArrangement = Arrangement.Center,

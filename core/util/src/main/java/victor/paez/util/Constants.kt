@@ -16,9 +16,7 @@ const val ID_CLIENT_FIREBASE = "idClient"
 const val DATE_FIREBASE = "date"
 
 // Resume Information values
-const val DEBT = "debt"
 const val PEOPLE = "people"
-const val REVENUE = "revenue"
 const val TOTAL_EVERY_WEEK = "totalEveryWeek"
 
 // Accounts values
