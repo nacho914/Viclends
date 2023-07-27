@@ -23,4 +23,8 @@ class AccountRepositoryImp @Inject constructor(
     override suspend fun getAccountInformation(accountId: String): Flow<AccountDTO> = withContext(dispatcher) {
         firestoreDataSource.getAccountInformation(accountId)
     }
+
+    override suspend fun deleteAccount(accountId: String): Flow<Boolean> = withContext(dispatcher) {
+        firestoreDataSource.deleteAccount(accountId)
+    }
 }

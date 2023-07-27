@@ -20,7 +20,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import victor.paez.dashboard.R
 import victor.paez.dashboard.viewmodel.DashboardViewModel
@@ -59,11 +63,16 @@ fun DashboardScreen(
             colors = CardDefaults.cardColors(containerColor = LightPurple),
         ) {
             Row(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth().padding(8.dp),
                 horizontalArrangement = Arrangement.Center,
             ) {
                 Text(
                     text = "Prestamos historicos",
+                    style = TextStyle(
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 16.sp,
+                        fontFamily = FontFamily.SansSerif,
+                    ),
                 )
             }
             Row(
@@ -106,11 +115,16 @@ fun DashboardScreen(
             colors = CardDefaults.cardColors(containerColor = LightPurple),
         ) {
             Row(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth().padding(8.dp),
                 horizontalArrangement = Arrangement.Center,
             ) {
                 Text(
                     text = "Prestamos actuales",
+                    style = TextStyle(
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 16.sp,
+                        fontFamily = FontFamily.SansSerif,
+                    ),
                 )
             }
             Row(

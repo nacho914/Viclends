@@ -9,10 +9,12 @@ import victor.paez.account.model.AddAccountDTO
 import victor.paez.util.ACCOUNT_PATH
 import victor.paez.util.CLIENT_PATH
 import victor.paez.util.DEBT_FIREBASE
+import victor.paez.util.DELAY_FIREBASE
 import victor.paez.util.ID_CLIENT_FIREBASE
 import victor.paez.util.MAIN_PATH
 import victor.paez.util.MASTER_ID
 import victor.paez.util.ORIGINAL_DEBT_FIREBASE
+import victor.paez.util.ORIGINAL_DELAY_FIREBASE
 import victor.paez.util.ORIGINAL_REVENUE_FIREBASE
 import victor.paez.util.REVENUE_FIREBASE
 import javax.inject.Inject
@@ -113,5 +115,79 @@ class AccountDataSourceImp @Inject constructor(
                 }
         }
         emit(account)
+    }
+
+    override fun deleteAccount(accountId: String): Flow<Boolean> = flow {
+        val bResponse = suspendCoroutine { response ->
+
+            firestore.runTransaction { transaction ->
+                val mainDocRef = firestore.collection(MAIN_PATH)
+
+                // Get the values from account
+                val docAccount = mainDocRef.document(MASTER_ID).collection(ACCOUNT_PATH).document(accountId)
+                val accountSnapshot = transaction.get(docAccount)
+                val idClient = accountSnapshot.getString(ID_CLIENT_FIREBASE).toString()
+
+                // Get the values from the client
+                val docClient = mainDocRef.document(MASTER_ID).collection(CLIENT_PATH).document(idClient)
+                val clientSnapshot = transaction.get(docClient)
+
+                val originalDebtClient = clientSnapshot.getLong(ORIGINAL_DEBT_FIREBASE)!! - accountSnapshot.getLong(ORIGINAL_DEBT_FIREBASE)!!
+                val originalRevenueClient = clientSnapshot.getLong(ORIGINAL_REVENUE_FIREBASE)!! - accountSnapshot.getLong(ORIGINAL_REVENUE_FIREBASE)!!
+                val originalDelayClient = clientSnapshot.getLong(ORIGINAL_DELAY_FIREBASE)!! - accountSnapshot.getLong(
+                    ORIGINAL_DELAY_FIREBASE,
+                )!!
+
+                val debtClient = clientSnapshot.getLong(DEBT_FIREBASE)!! - accountSnapshot.getLong(DEBT_FIREBASE)!!
+                val revenueClient = clientSnapshot.getLong(REVENUE_FIREBASE)!! - accountSnapshot.getLong(REVENUE_FIREBASE)!!
+                val delayClient = clientSnapshot.getLong(DELAY_FIREBASE)!! - accountSnapshot.getLong(
+                    DELAY_FIREBASE,
+                )!!
+
+                // Get the values from resume table
+                val docResume = mainDocRef.document(MASTER_ID)
+                val resumeSnapshot = transaction.get(docResume)
+
+                val originalDebtResume = resumeSnapshot.getLong(ORIGINAL_DEBT_FIREBASE)!! - accountSnapshot.getLong(ORIGINAL_DEBT_FIREBASE)!!
+                val originalRevenueResume = resumeSnapshot.getLong(ORIGINAL_REVENUE_FIREBASE)!! - accountSnapshot.getLong(ORIGINAL_REVENUE_FIREBASE)!!
+                val originalDelayResume = resumeSnapshot.getLong(ORIGINAL_DELAY_FIREBASE)!! - accountSnapshot.getLong(
+                    ORIGINAL_DELAY_FIREBASE,
+                )!!
+
+                val debtResume = resumeSnapshot.getLong(DEBT_FIREBASE)!! - accountSnapshot.getLong(DEBT_FIREBASE)!!
+                val revenueResume = resumeSnapshot.getLong(REVENUE_FIREBASE)!! - accountSnapshot.getLong(REVENUE_FIREBASE)!!
+                val delayResume = resumeSnapshot.getLong(DELAY_FIREBASE)!! - accountSnapshot.getLong(
+                    DELAY_FIREBASE,
+                )!!
+
+                // rest account to the client
+                transaction.update(docClient, ORIGINAL_DEBT_FIREBASE, originalDebtClient)
+                transaction.update(docClient, ORIGINAL_REVENUE_FIREBASE, originalRevenueClient)
+                transaction.update(docClient, ORIGINAL_DELAY_FIREBASE, originalDelayClient)
+                transaction.update(docClient, DEBT_FIREBASE, debtClient)
+                transaction.update(docClient, REVENUE_FIREBASE, revenueClient)
+                transaction.update(docClient, DELAY_FIREBASE, delayClient)
+
+                // rest account to the resume
+                transaction.update(docResume, ORIGINAL_DEBT_FIREBASE, originalDebtResume)
+                transaction.update(docResume, ORIGINAL_REVENUE_FIREBASE, originalRevenueResume)
+                transaction.update(docResume, ORIGINAL_DELAY_FIREBASE, originalDelayResume)
+                transaction.update(docResume, DEBT_FIREBASE, debtResume)
+                transaction.update(docResume, REVENUE_FIREBASE, revenueResume)
+                transaction.update(docResume, DELAY_FIREBASE, delayResume)
+
+                // delete client to collection Firebase
+                transaction.delete(docAccount)
+
+                null
+            }.addOnSuccessListener {
+                response.resume(true)
+            }.addOnFailureListener {
+                response.resume(false)
+                Log.d("Nacho", "Error Message :${it.message}")
+            }
+        }
+
+        emit(bResponse)
     }
 }

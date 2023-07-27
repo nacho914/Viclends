@@ -29,7 +29,9 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import victor.paez.acountlist.R
 import victor.paez.acountlist.viewmodel.AccountListViewModel
+import victor.paez.ui.BlockingLoadingWheel
 import victor.paez.ui.LoadingWheel
+import victor.paez.ui.MainAlertDialog
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -44,7 +46,8 @@ fun AccountListScreen(
 ) {
     val accountList by accountListViewModel.accountList
     val isLoading: Boolean by accountListViewModel.isLoading
-
+    val isAccountDeleted: Boolean by accountListViewModel.isAccountDeleted
+    val isDeleting: Boolean by accountListViewModel.isDeleting
     changeTitle(stringResource(id = R.string.account_list_screen))
 
     LaunchedEffect(clientId) {
@@ -53,6 +56,16 @@ fun AccountListScreen(
 
     if (isLoading) {
         LoadingWheel()
+    }
+
+    MainAlertDialog(
+        showDialog = isAccountDeleted,
+        title = "Cuenta eliminada",
+        textBody = "La cuenta ha sido eliminada con exito",
+        confirmText = "OK",
+    ) {
+        accountListViewModel.getAccountList(clientId)
+        accountListViewModel.isAccountDeleted.value = false
     }
 
     LazyColumn(modifier = Modifier.fillMaxSize().padding(padding)) {
@@ -111,8 +124,30 @@ fun AccountListScreen(
                             )
                         }
                     }
+
+                    Column(
+                        horizontalAlignment = Alignment.End,
+                        modifier = Modifier
+                            .wrapContentWidth()
+                            .weight(0.2f)
+                            .padding(start = 8.dp),
+                    ) {
+                        IconButton(onClick = {
+                            accountListViewModel.deleteAccount(account.id.orEmpty())
+                        }) {
+                            Icon(
+                                painter = painterResource(id = victor.paez.ui.R.drawable.baseline_delete_24),
+                                contentDescription = "Delete account",
+                                tint = Color.Black,
+                            )
+                        }
+                    }
                 }
             }
         }
+    }
+
+    if (isDeleting) {
+        BlockingLoadingWheel()
     }
 }
