@@ -10,13 +10,11 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Divider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -29,8 +27,9 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import victor.paez.dashboard.R
 import victor.paez.dashboard.viewmodel.DashboardViewModel
 import victor.paez.ui.LoadingWheel
+import victor.paez.ui.MainDebtCard
 import victor.paez.usecases.model.DashboardData
-import victor.paez.util.LightPurple
+import victor.paez.util.Claret
 
 @Composable
 fun DashboardScreen(
@@ -57,109 +56,37 @@ fun DashboardScreen(
         verticalArrangement = Arrangement.SpaceEvenly,
     ) {
         // Original Card
-        Card(
-            Modifier.fillMaxWidth().padding(horizontal = 16.dp),
-            shape = CardDefaults.elevatedShape,
-            colors = CardDefaults.cardColors(containerColor = LightPurple),
+        MainDebtCard(
+            title = "Prestamos historicos",
+            total = dashboardViewModel.getOriginalTotal(),
+            debt = dashboardData.originalDebt,
+            revenue = dashboardData.originalRevenue,
+            delay = dashboardData.originalDelay,
         ) {
-            Row(
-                modifier = Modifier.fillMaxWidth().padding(8.dp),
-                horizontalArrangement = Arrangement.Center,
-            ) {
-                Text(
-                    text = "Prestamos historicos",
-                    style = TextStyle(
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 16.sp,
-                        fontFamily = FontFamily.SansSerif,
-                    ),
-                )
-            }
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.Center,
-            ) {
-                Column(
-                    Modifier.weight(0.3f).padding(16.dp),
-                    verticalArrangement = Arrangement.Center,
-                ) {
-                    Image(
-                        painter = painterResource(id = victor.paez.ui.R.drawable.baseline_history_24),
-                        contentDescription = "",
-                        modifier = Modifier.size(80.dp),
-                    )
-                }
-                Column(
-                    horizontalAlignment = Alignment.Start,
-                    modifier = Modifier.fillMaxWidth().padding(16.dp).weight(0.7f),
-                ) {
-                    Text(
-                        text = "Total prestado: " + dashboardViewModel.getOriginalTotal().toString(),
-                    )
-                    Text(
-                        text = "Deuda Original: " + dashboardData.originalDebt.toString(),
-                    )
-                    Text(
-                        text = "Ganancia Original: " + dashboardData.originalRevenue.toString(),
-                    )
-                    Text(
-                        text = "Retardo Original: " + dashboardData.originalDelay.toString(),
-                    )
-                }
-            }
+            Image(
+                painter = painterResource(id = victor.paez.ui.R.drawable.baseline_history_24),
+                contentDescription = "",
+                modifier = Modifier.size(80.dp),
+            )
         }
+
         // Present Card
-        Card(
-            Modifier.fillMaxWidth().padding(horizontal = 16.dp),
-            shape = CardDefaults.elevatedShape,
-            colors = CardDefaults.cardColors(containerColor = LightPurple),
+
+        MainDebtCard(
+            title = "Prestamos actuales",
+            total = dashboardViewModel.getPresentTotal(),
+            debt = dashboardData.debt,
+            revenue = dashboardData.revenue,
+            delay = dashboardData.delay,
         ) {
-            Row(
-                modifier = Modifier.fillMaxWidth().padding(8.dp),
-                horizontalArrangement = Arrangement.Center,
-            ) {
-                Text(
-                    text = "Prestamos actuales",
-                    style = TextStyle(
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 16.sp,
-                        fontFamily = FontFamily.SansSerif,
-                    ),
-                )
-            }
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.Center,
-            ) {
-                Column(
-                    Modifier.weight(0.3f).padding(16.dp),
-                    verticalArrangement = Arrangement.Center,
-                ) {
-                    Image(
-                        painter = painterResource(id = victor.paez.ui.R.drawable.baseline_present_24),
-                        contentDescription = "",
-                        modifier = Modifier.size(80.dp),
-                    )
-                }
-                Column(
-                    horizontalAlignment = Alignment.Start,
-                    modifier = Modifier.fillMaxWidth().padding(16.dp).weight(0.7f),
-                ) {
-                    Text(
-                        text = "Total Actual: " + dashboardViewModel.getPresentTotal().toString(),
-                    )
-                    Text(
-                        text = "Deuda Actual: " + dashboardData.debt.toString(),
-                    )
-                    Text(
-                        text = "Ganancia Actual: " + dashboardData.revenue.toString(),
-                    )
-                    Text(
-                        text = "Retardo Actual: " + dashboardData.delay.toString(),
-                    )
-                }
-            }
+            Image(
+                painter = painterResource(id = victor.paez.ui.R.drawable.baseline_present_24),
+                contentDescription = "",
+                modifier = Modifier.size(80.dp),
+            )
         }
+
+        Divider(color = Claret, thickness = 1.dp)
 
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -167,6 +94,11 @@ fun DashboardScreen(
         ) {
             Text(
                 text = "Personas con prestamos activos",
+                style = TextStyle(
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 16.sp,
+                    fontFamily = FontFamily.SansSerif,
+                ),
             )
         }
 
@@ -175,9 +107,11 @@ fun DashboardScreen(
             horizontalArrangement = Arrangement.Center,
         ) {
             Text(
-                text = dashboardData.people.toString(),
+                text = dashboardData.people.toString() + " Personas",
             )
         }
+
+        Divider(color = Claret, thickness = 1.dp)
 
         Row(
             modifier = Modifier.fillMaxWidth().padding(bottom = 16.dp),

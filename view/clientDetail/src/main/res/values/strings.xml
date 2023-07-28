@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="detail_client_screen">Detalle del cliente</string>
-    <string name="name_detail">Name :</string>
+    <string name="name_detail">Nombre :</string>
+    <string name="birthday_detail">Fecha de cumpleaños :</string>
+    <string name="age_detail">Edad: </string>
+    <string name="phone_detail">Celular: </string>
     <string name="accounts_list">Listado de cuentas</string>
     <string name="delete_client">Eliminar cliente</string>
+    <string name="years_client">%1$d años</string>
 </resources>

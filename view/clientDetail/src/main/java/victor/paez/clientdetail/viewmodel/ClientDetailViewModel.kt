@@ -48,4 +48,14 @@ class ClientDetailViewModel @Inject constructor(
             }
         }
     }
+
+    fun getOriginalTotal(): Int =
+        clientDetail.value.originalDebt +
+            clientDetail.value.originalRevenue +
+            clientDetail.value.originalDelay
+
+    fun getPresentTotal(): Int =
+        clientDetail.value.debt +
+            clientDetail.value.revenue +
+            clientDetail.value.delay
 }
