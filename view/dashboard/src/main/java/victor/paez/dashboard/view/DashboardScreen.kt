@@ -53,10 +53,6 @@ fun DashboardScreen(
     val dashboardData: DashboardData by dashboardViewModel.dashboardData
     val isLoading: Boolean by dashboardViewModel.isLoading
 
-    if (isLoading) {
-        LoadingWheel()
-    }
-
     Column(
         modifier = Modifier.padding(innerPadding).fillMaxSize(),
         verticalArrangement = Arrangement.SpaceEvenly,
@@ -144,5 +140,9 @@ fun DashboardScreen(
                 Text(text = "Listado de clientes")
             }
         }
+    }
+
+    if (isLoading) {
+        LoadingWheel()
     }
 }
