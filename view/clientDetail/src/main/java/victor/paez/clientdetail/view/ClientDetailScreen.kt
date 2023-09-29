@@ -12,16 +12,22 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.Tab
+import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
@@ -58,6 +64,7 @@ fun ClientDetailScreen(
 
     LazyColumn(
         modifier = Modifier.fillMaxSize().padding(padding),
+        verticalArrangement = Arrangement.SpaceBetween,
     ) {
         item {
             Row(
@@ -102,38 +109,56 @@ fun ClientDetailScreen(
                 }
             }
 
-            // Historic data information
-            MainDebtCard(
-                title = "Prestamos historicos",
-                total = clientDetailViewModel.getOriginalTotal(),
-                debt = client.originalDebt,
-                revenue = client.originalRevenue,
-                delay = client.originalDelay,
-            ) {
-                Image(
-                    painter = painterResource(id = R.drawable.baseline_history_24),
-                    contentDescription = "",
-                    modifier = Modifier.size(80.dp),
-                )
+            var state by remember { mutableStateOf(0) }
+            val titles = listOf("Prestamos historicos", "Prestamos actuales")
+
+            TabRow(selectedTabIndex = state) {
+                titles.forEachIndexed { index, title ->
+                    Tab(
+                        selected = state == index,
+                        onClick = { state = index },
+                        text = { Text(text = title, maxLines = 2, overflow = TextOverflow.Ellipsis) },
+                    )
+                }
             }
 
-            // Present data information
-            MainDebtCard(
-                title = "Prestamos actuales",
-                total = clientDetailViewModel.getPresentTotal(),
-                debt = client.debt,
-                revenue = client.revenue,
-                delay = client.delay,
-            ) {
-                Image(
-                    painter = painterResource(id = R.drawable.baseline_present_24),
-                    contentDescription = "",
-                    modifier = Modifier.size(80.dp),
-                )
+            when (state) {
+                0 -> {
+                    // Historic data information
+                    MainDebtCard(
+                        title = "Prestamos historicos",
+                        total = clientDetailViewModel.getOriginalTotal(),
+                        debt = client.originalDebt,
+                        revenue = client.originalRevenue,
+                        delay = client.originalDelay,
+                    ) {
+                        Image(
+                            painter = painterResource(id = R.drawable.baseline_history_24),
+                            contentDescription = "",
+                            modifier = Modifier.size(80.dp),
+                        )
+                    }
+                }
+                else -> {
+                    // Present data information
+                    MainDebtCard(
+                        title = "Prestamos actuales",
+                        total = clientDetailViewModel.getPresentTotal(),
+                        debt = client.debt,
+                        revenue = client.revenue,
+                        delay = client.delay,
+                    ) {
+                        Image(
+                            painter = painterResource(id = R.drawable.baseline_present_24),
+                            contentDescription = "",
+                            modifier = Modifier.size(80.dp),
+                        )
+                    }
+                }
             }
 
             Row(
-                modifier = Modifier.fillMaxWidth().padding(8.dp),
+                modifier = Modifier.fillMaxWidth().padding(16.dp),
                 horizontalArrangement = Arrangement.Center,
             ) {
                 Button(onClick = { navAccountList(clientId) }) {
@@ -142,7 +167,7 @@ fun ClientDetailScreen(
             }
 
             Row(
-                modifier = Modifier.fillMaxWidth().padding(8.dp),
+                modifier = Modifier.fillMaxWidth().padding(16.dp),
                 horizontalArrangement = Arrangement.Center,
             ) {
                 Button(onClick = {

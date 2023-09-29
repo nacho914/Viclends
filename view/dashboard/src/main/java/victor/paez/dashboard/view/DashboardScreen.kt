@@ -11,16 +11,22 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
 import androidx.compose.material3.Divider
+import androidx.compose.material3.Tab
+import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -55,35 +61,52 @@ fun DashboardScreen(
         modifier = Modifier.padding(innerPadding).fillMaxSize(),
         verticalArrangement = Arrangement.SpaceEvenly,
     ) {
-        // Original Card
-        MainDebtCard(
-            title = "Prestamos historicos",
-            total = dashboardViewModel.getOriginalTotal(),
-            debt = dashboardData.originalDebt,
-            revenue = dashboardData.originalRevenue,
-            delay = dashboardData.originalDelay,
-        ) {
-            Image(
-                painter = painterResource(id = victor.paez.ui.R.drawable.baseline_history_24),
-                contentDescription = "",
-                modifier = Modifier.size(80.dp),
-            )
+        var state by remember { mutableStateOf(0) }
+        val titles = listOf("Prestamos historicos", "Prestamos actuales")
+
+        TabRow(selectedTabIndex = state) {
+            titles.forEachIndexed { index, title ->
+                Tab(
+                    selected = state == index,
+                    onClick = { state = index },
+                    text = { Text(text = title, maxLines = 2, overflow = TextOverflow.Ellipsis) },
+                )
+            }
         }
 
-        // Present Card
-
-        MainDebtCard(
-            title = "Prestamos actuales",
-            total = dashboardViewModel.getPresentTotal(),
-            debt = dashboardData.debt,
-            revenue = dashboardData.revenue,
-            delay = dashboardData.delay,
-        ) {
-            Image(
-                painter = painterResource(id = victor.paez.ui.R.drawable.baseline_present_24),
-                contentDescription = "",
-                modifier = Modifier.size(80.dp),
-            )
+        when (state) {
+            0 -> {
+                // Historic data information
+                MainDebtCard(
+                    title = "Prestamos historicos",
+                    total = dashboardViewModel.getOriginalTotal(),
+                    debt = dashboardData.originalDebt,
+                    revenue = dashboardData.originalRevenue,
+                    delay = dashboardData.originalDelay,
+                ) {
+                    Image(
+                        painter = painterResource(id = victor.paez.ui.R.drawable.baseline_history_24),
+                        contentDescription = "",
+                        modifier = Modifier.size(80.dp),
+                    )
+                }
+            }
+            else -> {
+                // Present Card
+                MainDebtCard(
+                    title = "Prestamos actuales",
+                    total = dashboardViewModel.getPresentTotal(),
+                    debt = dashboardData.debt,
+                    revenue = dashboardData.revenue,
+                    delay = dashboardData.delay,
+                ) {
+                    Image(
+                        painter = painterResource(id = victor.paez.ui.R.drawable.baseline_present_24),
+                        contentDescription = "",
+                        modifier = Modifier.size(80.dp),
+                    )
+                }
+            }
         }
 
         Divider(color = Claret, thickness = 1.dp)

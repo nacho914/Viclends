@@ -28,7 +28,7 @@ fun MainDebtCard(
     icon: @Composable () -> Unit = {},
 ) {
     Card(
-        Modifier.fillMaxWidth().padding(16.dp),
+        Modifier.fillMaxWidth().padding(24.dp),
         shape = CardDefaults.elevatedShape,
         colors = CardDefaults.cardColors(containerColor = LightPurple),
     ) {
